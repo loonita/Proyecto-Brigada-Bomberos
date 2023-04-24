@@ -1,9 +1,7 @@
 "use strict";
 // Importa el modulo 'mongoose' para crear la conexion a la base de datos
 const mongoose = require("mongoose");
-
-const ROLES = ["user", "admin"];
-
+const { ROLES } = require("../constans.js");
 // Crea el esquema de la coleccion 'roles'
 const roleSchema = new mongoose.Schema({
   name: {
