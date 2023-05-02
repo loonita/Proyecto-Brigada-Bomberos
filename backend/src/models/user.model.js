@@ -19,6 +19,18 @@ const userSchema = new mongoose.Schema({
       ref: "Role",
     },
   ],
+  peso: {
+    type: Number,
+    required: true,
+    unique: false,
+    default: 0.0,
+  },
+  altura: {
+    type: Number,
+    required: true,
+    unique: false,
+    default: 0.0,
+  },
 });
 
 // Crea el modelo de datos 'User' a partir del esquema 'userSchema'

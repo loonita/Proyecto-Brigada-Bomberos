@@ -75,8 +75,9 @@ async function getUserById(id) {
 async function updateUser(id, user) {
   try {
     const { error } = userBodySchema.validate(user);
-    if (error) return null;
-
+    if (error) {
+      return null;
+    }
     return await User.findByIdAndUpdate(id, user);
   } catch (error) {
     handleError(error, "user.service -> updateUser");
