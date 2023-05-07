@@ -35,6 +35,26 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  genero: {
+    type: String,
+    required: true,
+    unique: false,
+  },
+  telefono: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  rut: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  domicilio: {
+    type: String,
+    required: true,
+    unique: false,
+  },
 });
 
 // Crea el modelo de datos 'User' a partir del esquema 'userSchema'
