@@ -36,7 +36,7 @@ async function createUser(user) {
   try {
     const { error } = userBodySchema.validate(user);
     if (error) return null;
-    const { name, email, roles } = user;
+    const { name, email, roles, peso, altura, fechaNacimiento } = user;
 
     const userFound = await User.findOne({ email: user.email });
     if (userFound) return null;
@@ -44,7 +44,14 @@ async function createUser(user) {
     const rolesFound = await Role.find({ name: { $in: roles } });
     const myRole = rolesFound.map((role) => role._id);
 
-    const newUser = new User({ name, email, roles: myRole });
+    const newUser = new User({
+      name,
+      email,
+      roles: myRole,
+      peso,
+      altura,
+      fechaNacimiento,
+    });
     return await newUser.save();
   } catch (error) {
     handleError(error, "user.service -> createUser");

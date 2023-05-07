@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     unique: false,
     default: 0.0,
   },
+  fechaNacimiento: {
+    type: Date,
+    required: true,
+  },
 });
 
 // Crea el modelo de datos 'User' a partir del esquema 'userSchema'
