@@ -36,7 +36,18 @@ async function createUser(user) {
   try {
     const { error } = userBodySchema.validate(user);
     if (error) return null;
-    const { name, email, roles, peso, altura, fechaNacimiento } = user;
+    const {
+      name,
+      email,
+      roles,
+      peso,
+      altura,
+      fechaNacimiento,
+      genero,
+      telefono,
+      rut,
+      domicilio,
+    } = user;
 
     const userFound = await User.findOne({ email: user.email });
     if (userFound) return null;
@@ -51,6 +62,10 @@ async function createUser(user) {
       peso,
       altura,
       fechaNacimiento,
+      genero,
+      telefono,
+      rut,
+      domicilio,
     });
     return await newUser.save();
   } catch (error) {
