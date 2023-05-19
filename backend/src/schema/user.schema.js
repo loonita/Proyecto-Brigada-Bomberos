@@ -36,4 +36,4 @@ const userBodyPutSchema = Joi.object({
   domicilio,
 });
 
-module.exports = { userBodySchema };
+module.exports = { userBodySchema, userBodyPutSchema };
