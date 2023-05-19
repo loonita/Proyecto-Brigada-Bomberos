@@ -25,6 +25,7 @@ async function isNutricionista(req, res, next) {
     const user = await User.findById(req.userId);
     const roles = await Role.find({ _id: { $in: user.roles } });
     for (let i = 0; i < roles.length; i++) {
+      console.log(roles[i].name);
       if (roles[i].name === "nutricionista") {
         next();
         return;

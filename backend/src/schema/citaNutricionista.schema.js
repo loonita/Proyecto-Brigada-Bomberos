@@ -8,7 +8,7 @@ const citaNutricionistaBodySchema = Joi.object({
   nutricionista: nutricionista.required(),
   brigadista: brigadista.required(),
   fecha: fecha.required(),
-  invalid: invalid.required(),
+  invalid: invalid,
 });
 const citaNutricionistaBodyPutSchema = Joi.object({
   nutricionista,

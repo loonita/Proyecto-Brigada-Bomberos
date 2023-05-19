@@ -37,7 +37,10 @@ async function createCitaNutricionista(citaNutricionista) {
   // Esta funcion es similar al singup
   try {
     const { error } = citaNutricionistaBodySchema.validate(citaNutricionista);
-    if (error) return null;
+    console.log(error);
+    if (error) {
+      return null;
+    }
     const { nutricionista, brigadista, fecha, invalid } = citaNutricionista;
 
     const newCitaNutricionista = new CitaNutricionista({

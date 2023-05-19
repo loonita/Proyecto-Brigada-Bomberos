@@ -15,7 +15,7 @@ async function getCitaNutricionista(req, res) {
     const cita = await CitaNutricionistaService.getCitaNutricionista();
     cita.length === 0
       ? respondSuccess(req, res, 204)
-      : respondSuccess(req, res, 200, usuarios);
+      : respondSuccess(req, res, 200, cita);
   } catch (error) {
     respondError(req, res, 400, error.message);
   }
@@ -108,7 +108,7 @@ async function updateCitaNutricionista(req, res) {
       error,
       "citaNutricionista.controller -> updateCitaNutricionista",
     );
-    respondError(req, res, 500, "No se pudo actualizar el usuario");
+    respondError(req, res, 500, "No se pudo actualizar la cita");
   }
 }
 
@@ -121,7 +121,7 @@ async function updateCitaNutricionista(req, res) {
 async function deleteCitaNutricionista(req, res) {
   try {
     const { id } = req.params;
-    const cita = await citaNutricionistaService.deleteCitaNutricionista(id);
+    const cita = await CitaNutricionistaService.deleteCitaNutricionista(id);
     cita === null
       ? respondError(
           req,
@@ -131,7 +131,7 @@ async function deleteCitaNutricionista(req, res) {
           "Not Found",
           { message: "Verifique el id ingresado" },
         )
-      : respondSuccess(req, res, 200, user);
+      : respondSuccess(req, res, 200, cita);
   } catch (error) {
     handleError(
       error,

@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const mongoose = require("mongoose");
 
 const citaNutricionistaSchema = new mongoose.Schema({
@@ -17,7 +18,8 @@ const citaNutricionistaSchema = new mongoose.Schema({
   },
   invalid: {
     type: Boolean,
-    required: true,
+    default: false,
+    required: false,
   },
 });
 
