@@ -14,7 +14,11 @@ const router = express.Router();
 router.get("/", usuarioController.getUsers);
 router.post("/", authoMiddleware.isAdmin, usuarioController.createUser);
 router.get("/:id", usuarioController.getUserById);
-router.put("/:id", authoMiddleware.isAdmin, usuarioController.updateUser);
+router.put(
+  "/:id",
+  authoMiddleware.isNutricionista,
+  usuarioController.updateUser,
+);
 router.delete("/:id", authoMiddleware.isAdmin, usuarioController.deleteUser);
 
 // Exporta el enrutador

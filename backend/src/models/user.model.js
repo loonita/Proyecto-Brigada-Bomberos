@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role",
+      required: true,
     },
   ],
   peso: {
@@ -53,6 +54,11 @@ const userSchema = new mongoose.Schema({
   domicilio: {
     type: String,
     required: true,
+    unique: false,
+  },
+  imc: {
+    type: Number,
+    required: false,
     unique: false,
   },
 });
