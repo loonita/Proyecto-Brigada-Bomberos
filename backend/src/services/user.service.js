@@ -112,8 +112,9 @@ async function getUserById(id) {
 async function updateUser(id, user) {
   try {
     const { error } = userBodySchema.validate(user);
+    console.log(user);
+    user.imc = user.peso / (user.altura * user.altura);
     if (error) {
-      console.log(error);
       return null;
     }
     return await User.findByIdAndUpdate(id, user);

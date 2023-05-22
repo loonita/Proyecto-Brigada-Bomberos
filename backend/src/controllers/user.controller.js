@@ -83,7 +83,6 @@ async function updateUser(req, res) {
   try {
     const { id } = req.params;
     const user = await UserService.updateUser(id, req.body);
-    console.log(user);
     user === null
       ? respondError(
           req,
