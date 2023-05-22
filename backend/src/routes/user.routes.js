@@ -18,4 +18,4 @@ router.put("/:id", authoMiddleware.isAdmin, usuarioController.updateUser);
 router.delete("/:id", authoMiddleware.isAdmin, usuarioController.deleteUser);
 
 // Exporta el enrutador
-module.exports = router;
+module.exports = router; 

@@ -3,7 +3,6 @@
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const UserService = require("../services/user.service");
 const { handleError } = require("../utils/errorHandler");
-
 /**
  * @name getUsers
  * @description Obtiene todos los usuarios
@@ -24,7 +23,7 @@ async function getUsers(req, res) {
 /**
  * @name createUser
  * @description Crea un nuevo usuario
- * @param req {Request}
+ * @param req {Request}n
  * @param res {Response}
  */
 async function createUser(req, res) {

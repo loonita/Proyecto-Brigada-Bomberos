@@ -3,7 +3,7 @@ const ROLES = [
   "admin",
   "nutricionista",
   "brigadista",
-  "prepadador fisico",
+  "prepadador_fisico",
   "jefe de brigada",
 ];
 
