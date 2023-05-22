@@ -48,6 +48,11 @@ async function createUser(user) {
       rut,
       domicilio,
       imc,
+      nombreEjercicio,
+      categoriaEjercicio,
+      enfoqueEjercicio,
+      seriesEjercicio,
+      repeticionesEjercicio,
     } = user;
 
     const userFound = await User.findOne({ email: user.email });
@@ -81,6 +86,11 @@ async function createUser(user) {
       rut,
       domicilio,
       imc,
+      nombreEjercicio,
+      categoriaEjercicio,
+      enfoqueEjercicio,
+      seriesEjercicio,
+      repeticionesEjercicio,
     });
     return await newUser.save();
   } catch (error) {

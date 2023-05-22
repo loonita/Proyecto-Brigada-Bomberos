@@ -10,7 +10,9 @@ const authRoutes = require("./auth.routes.js");
 const authMiddleware = require("../middlewares/authe.middleware.js");
 
 const citaNutricionistaRoutes = require("./citaNutricionista.routes.js");
+const citaPreparadorRoutes = require("./citaPreparador.routes.js");
 const roleRoutes = require("./role.routes.js");
+
 // Crea una instancia del enrutador
 const router = express.Router();
 
@@ -23,6 +25,12 @@ router.use(
   "/citaNutricionista",
   authMiddleware.verifyToken,
   citaNutricionistaRoutes,
+);
+
+router.use(
+  "/citaPreparador",
+  authMiddleware.verifyToken,
+  citaPreparadorRoutes,
 );
 
 router.use("/roles", authMiddleware.verifyToken, roleRoutes);
