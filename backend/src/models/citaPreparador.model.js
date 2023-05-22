@@ -22,6 +22,32 @@ const citaPreparadorSchema = new mongoose.Schema({
         default: false,
         required: false,
     },
+    // mis cambios de noche, se agrego nombre, categoria, enfoque, series, repeticiones.
+    nombreEjercicio: {
+        type: String,
+        ref: "User",
+        required: true,
+      },
+    categoriaEjercicio: {
+        type: String,
+        ref: "User",
+        required: true,
+    },
+    enfoqueEjercicio: {
+        type: String,
+        ref: "User",
+        required: true,
+    },
+    seriesEjercicio: {
+        type: Number,
+        ref: "User",
+        required: true,
+    },
+    repeticionesEjercicio: {
+        type: Number,
+        ref: "User",
+        required: true,
+    },
 });
 
 const CitaPreparador = mongoose.model(

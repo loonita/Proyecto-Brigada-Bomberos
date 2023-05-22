@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role",
+      required: true,
     },
   ],
   peso: {
@@ -55,6 +56,37 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: false,
   },
+  imc: {
+    type: Number,
+    required: false,
+    unique: false,
+  },
+  // cambios de noche
+  nombreEjercicio: {
+    type: String,
+    ref: "User",
+    required: true,
+  },
+categoriaEjercicio: {
+    type: String,
+    ref: "User",
+    required: true,
+},
+enfoqueEjercicio: {
+    type: String,
+    ref: "User",
+    required: true,
+},
+seriesEjercicio: {
+    type: Number,
+    ref: "User",
+    required: true,
+},
+repeticionesEjercicio: {
+    type: Number,
+    ref: "User",
+    required: true,
+},
 });
 
 // Crea el modelo de datos 'User' a partir del esquema 'userSchema'

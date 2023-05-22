@@ -47,18 +47,37 @@ async function createUser(user) {
       telefono,
       rut,
       domicilio,
+      imc,
+      nombreEjercicio,
+      categoriaEjercicio,
+      enfoqueEjercicio,
+      seriesEjercicio,
+      repeticionesEjercicio,
     } = user;
 
     const userFound = await User.findOne({ email: user.email });
     if (userFound) return null;
 
-    const rolesFound = await Role.find({ name: { $in: roles } });
-    const myRole = rolesFound.map((role) => role._id);
+    // si un rol no es un id valido, retorna null
+    for (let i = 0; i < roles.length; i++) {
+      if (!roles[i].match(/^[0-9a-fA-F]{24}$/)) {
+        return null;
+      }
+    }
+
+    // si un rol no existe, retorna null
+    const myRoles = [];
+    for (let i = 0; i < roles.length; i++) {
+      const rolesFound = await Role.findById(roles[i]);
+      if (!rolesFound) return null;
+
+      myRoles.push(rolesFound._id);
+    }
 
     const newUser = new User({
       name,
       email,
-      roles: myRole,
+      roles: myRoles,
       peso,
       altura,
       fechaNacimiento,
@@ -66,6 +85,12 @@ async function createUser(user) {
       telefono,
       rut,
       domicilio,
+      imc,
+      nombreEjercicio,
+      categoriaEjercicio,
+      enfoqueEjercicio,
+      seriesEjercicio,
+      repeticionesEjercicio,
     });
     return await newUser.save();
   } catch (error) {
@@ -97,6 +122,8 @@ async function getUserById(id) {
 async function updateUser(id, user) {
   try {
     const { error } = userBodySchema.validate(user);
+    console.log(user);
+    user.imc = user.peso / (user.altura * user.altura);
     if (error) {
       return null;
     }

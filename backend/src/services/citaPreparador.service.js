@@ -41,13 +41,25 @@ async function createCitaPreparador(citaPreparador) {
     if (error) {
       return null;
     }
+<<<<<<< HEAD
     const { preparador_fisico, brigadista, fecha, invalid } = citaPreparador;
+=======
+    const { preparador_fisico, brigadista, fecha, invalid, nombreEjercicio, categoriaEjercicio, enfoqueEjercicio, seriesEjercicio, repeticionesEjercicio } = citaPreparador;
+>>>>>>> main
 
     const newCitaPreparador = new CitaPreparador({
       preparador_fisico,
       brigadista,
       fecha,
       invalid,
+<<<<<<< HEAD
+=======
+      nombreEjercicio,
+      categoriaEjercicio,
+      enfoqueEjercicio,
+      seriesEjercicio,
+      repeticionesEjercicio,
+>>>>>>> main
     });
     return await newCitaPreparador.save();
   } catch (error) {

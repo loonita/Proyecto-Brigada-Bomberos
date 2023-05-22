@@ -1,8 +1,8 @@
 "use strict"; // significa que el codigo debe interpretarse en modo estricto
 
 const {respondSuccess, respondError} = require("../utils/resHandler"); // se importa la funcion respondSuccess y respondError del archivo resHandler.js
-const CitaPreparador = require("../services/citaPreparador.service"); // se importa el modelo de datos "CitaPreparador" del archivo citaPreparador.model.js
-const { handleErrors } = require("../utils/errorHandler"); // se importa la funcion handleErrors del archivo errorHandler.js
+const CitaPreparadorService = require("../services/citaPreparador.service"); // se importa el modelo de datos "CitaPreparador" del archivo citaPreparador.model.js
+const { handleError} = require("../utils/errorHandler"); // se importa la funcion handleErrors del archivo errorHandler.js
 
 /**
  * @name getCitaPreparador
@@ -42,7 +42,11 @@ async function createCitaPreparador(req, res) {
             )
             : respondSuccess(req, res, 201, nuevoCitaPreparador);
     } catch (error) {
+<<<<<<< HEAD
         handleErrors(
+=======
+        handleError(
+>>>>>>> main
             error,
             "citaPreparador.controller -> createCitaPreparador",
         );

@@ -9,6 +9,7 @@ const authRoutes = require("./auth.routes.js");
 // Importa el middleware de autenticación
 const authMiddleware = require("../middlewares/authe.middleware.js");
 
+const citaNutricionistaRoutes = require("./citaNutricionista.routes.js");
 const citaPreparadorRoutes = require("./citaPreparador.routes.js");
 const roleRoutes = require("./role.routes.js");
 
@@ -21,12 +22,18 @@ router.use("/users", authMiddleware.verifyToken, userRoutes);
 router.use("/auth", authRoutes);
 
 router.use(
-    "/citaPreparador",
-    authMiddleware.verifyToken,
-    citaPreparadorRoutes,
-  );
-  
-  router.use("/roles", authMiddleware.verifyToken, roleRoutes);
+  "/citaNutricionista",
+  authMiddleware.verifyToken,
+  citaNutricionistaRoutes,
+);
+
+router.use(
+  "/citaPreparador",
+  authMiddleware.verifyToken,
+  citaPreparadorRoutes,
+);
+
+router.use("/roles", authMiddleware.verifyToken, roleRoutes);
 
 // Exporta el enrutador
 module.exports = router;

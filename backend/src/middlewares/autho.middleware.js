@@ -20,17 +20,35 @@ async function isAdmin(req, res, next) {
   }
 }
 
+async function isNutricionista(req, res, next) {
+  try {
+    const user = await User.findById(req.userId);
+    const roles = await Role.find({ _id: { $in: user.roles } });
+    for (let i = 0; i < roles.length; i++) {
+      console.log(roles[i].name);
+      if (roles[i].name === "nutricionista" || roles[i].name === "admin") {
+        next();
+        return;
+      }
+    }
+    return respondError(req, res, 401, "Require nutricionista!");
+  } catch (error) {
+    handleError(error, "autho.middleware -> isNutricionista");
+  }
+}
+
 async function isPreparador(req, res, next) {
   try {
     const user = await User.findById(req.userId);
     const roles = await Role.find({ _id: { $in: user.roles } });
     for (let i = 0; i < roles.length; i++) {
-      if (roles[i].name === "preparador_fisico") {
+      console.log(roles[i].name);
+      if (roles[i].name === "preparador_fisico" || roles[i].name === "admin") {
         next();
         return;
       }
     }
-    return respondError(req, res, 401, "Require preparador_fisico Role!");
+    return respondError(req, res, 401, "Require preparador_fisico!");
   } catch (error) {
     handleError(error, "autho.middleware -> isPreparador");
   }
@@ -38,5 +56,6 @@ async function isPreparador(req, res, next) {
 
 module.exports = {
   isAdmin,
+  isNutricionista,
   isPreparador,
 };
