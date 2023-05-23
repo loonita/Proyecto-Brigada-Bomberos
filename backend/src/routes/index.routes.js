@@ -1,8 +1,4 @@
-"use strict";
-// Importa el modulo 'express' para crear las rutas
 const express = require("express");
-
-// Importa el enrutador de usuarios
 const userRoutes = require("./user.routes.js");
 // Importa el enrutador de autenticación
 const authRoutes = require("./auth.routes.js");
@@ -10,7 +6,9 @@ const authRoutes = require("./auth.routes.js");
 const authMiddleware = require("../middlewares/authe.middleware.js");
 
 const citaNutricionistaRoutes = require("./citaNutricionista.routes.js");
+const citaPreparadorRoutes = require("./citaPreparador.routes.js");
 const roleRoutes = require("./role.routes.js");
+
 // Crea una instancia del enrutador
 const router = express.Router();
 
@@ -24,6 +22,17 @@ router.use(
   authMiddleware.verifyToken,
   citaNutricionistaRoutes,
 );
+
+router.use(
+  "/citaPreparador",
+  authMiddleware.verifyToken,
+  citaPreparadorRoutes,
+);
+
+router.use(
+  "/messages", 
+  authMiddleware.verifyToken, roleRoutes,
+  );
 
 router.use("/roles", authMiddleware.verifyToken, roleRoutes);
 

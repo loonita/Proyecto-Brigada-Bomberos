@@ -3,7 +3,7 @@
 const express = require("express");
 
 // Importa el controlador de usuarios
-const citaController = require("../controllers/citaNutricionista.controller.js");
+const citaController = require("../controllers/citaPreparador.controller.js");
 // Importa el middleware de autorización
 const authoMiddleware = require("../middlewares/autho.middleware.js");
 
@@ -11,22 +11,22 @@ const authoMiddleware = require("../middlewares/autho.middleware.js");
 const router = express.Router();
 
 // Define las rutas para los usuarios
-router.get("/", citaController.getCitaNutricionista);
+router.get("/", citaController.getCitaPreparador);
 router.post(
   "/",
-  authoMiddleware.isNutricionista, 
-  citaController.createCitaNutricionista,
+  authoMiddleware.isPreparador,
+  citaController.createCitaPreparador,
 );
-router.get("/:id", citaController.getCitaNutricionistaById);
+router.get("/:id", citaController.getCitaPreparadorById);
 router.put(
   "/:id",
-  authoMiddleware.isNutricionista,
-  citaController.updateCitaNutricionista,
+  authoMiddleware.isPreparador,
+  citaController.updateCitaPreparador,
 );
 router.delete(
   "/:id",
-  authoMiddleware.isNutricionista,
-  citaController.deleteCitaNutricionista,
+  authoMiddleware.isPreparador,
+  citaController.deleteCitaPreparador,
 );
 
 // Exporta el enrutador
