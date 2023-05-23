@@ -16,7 +16,7 @@ router.post("/", authoMiddleware.isAdmin, usuarioController.createUser);
 router.get("/:id", usuarioController.getUserById);
 router.put(
   "/:id",
-  authoMiddleware.isNutricionista,
+  authoMiddleware.isNutricionista||authoMiddleware.isPreparador||authoMiddleware.isAdmin,
   usuarioController.updateUser,
 );
 router.delete("/:id", authoMiddleware.isAdmin, usuarioController.deleteUser);
