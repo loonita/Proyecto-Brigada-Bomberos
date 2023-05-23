@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", citaController.getCitaNutricionista);
 router.post(
   "/",
-  authoMiddleware.isNutricionista,
+  authoMiddleware.isNutricionista, 
   citaController.createCitaNutricionista,
 );
 router.get("/:id", citaController.getCitaNutricionistaById);

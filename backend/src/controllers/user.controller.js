@@ -47,6 +47,56 @@ async function createUser(req, res) {
 }
 
 /**
+ * @name getUsersCSV
+ * @description Obtiene todos los usuarios en formato CSV
+ * @param req {Request}
+ * @param res {Response}
+ */
+async function getUsersCSV(req, res) {
+  try {
+    const users = await UserService.getUsers();
+
+    let csvData =
+      [
+        "Nombre",
+        "RUT",
+        "Email",
+        "Domicilio",
+        "Telefono",
+        "Fecha Nacimineto",
+        "Genero",
+        "Peso",
+        "Altura",
+        "IMC",
+      ].join(",") + "\r\n";
+    users.forEach((user) => {
+      csvData +=
+        [
+          user.name,
+          user.rut,
+          user.email,
+          user.domicilio,
+          user.telefono,
+          user.fechaNacimiento,
+          user.genero,
+          user.peso,
+          user.altura,
+          user.imc,
+        ].join(",") + "\r\n";
+    });
+
+    res
+      .set({
+        "Content-Type": "text/csv",
+        "Content-Disposition": `attachment; filename="users.csv"`,
+      })
+      .send(csvData);
+  } catch (error) {
+    respondError(req, res, 400, error.message);
+  }
+}
+
+/**
  * @name getUserById
  * @description Obtiene un usuario por su id
  * @param req {Request}
@@ -70,6 +120,55 @@ async function getUserById(req, res) {
   } catch (error) {
     handleError(error, "user.controller -> getUserById");
     respondError(req, res, 500, "No se pudo obtener el usuario");
+  }
+}
+
+/**
+ * @name getUserByIdCSV
+ * @description Obtiene todos los usuarios en formato CSV
+ * @param req {Request}
+ * @param res {Response}
+ */
+async function getUserByIdCSV(req, res) {
+  try {
+    const { id } = req.params;
+    const user = await UserService.getUserById(id);
+
+    let csvData =
+      [
+        "Nombre",
+        "RUT",
+        "Email",
+        "Domicilio",
+        "Telefono",
+        "Fecha Nacimineto",
+        "Genero",
+        "Peso",
+        "Altura",
+        "IMC",
+      ].join(",") + "\r\n";
+    csvData +=
+      [
+        user.name,
+        user.rut,
+        user.email,
+        user.domicilio,
+        user.telefono,
+        user.fechaNacimiento,
+        user.genero,
+        user.peso,
+        user.altura,
+        user.imc,
+      ].join(",") + "\r\n";
+
+    res
+      .set({
+        "Content-Type": "text/csv",
+        "Content-Disposition": `attachment; filename="users.csv"`,
+      })
+      .send(csvData);
+  } catch (error) {
+    respondError(req, res, 400, error.message);
   }
 }
 
@@ -127,8 +226,10 @@ async function deleteUser(req, res) {
 
 module.exports = {
   getUsers,
+  getUsersCSV,
   createUser,
   getUserById,
+  getUserByIdCSV,
   updateUser,
   deleteUser,
 };

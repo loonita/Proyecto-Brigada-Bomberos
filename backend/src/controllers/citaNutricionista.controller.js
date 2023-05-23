@@ -3,10 +3,11 @@
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const CitaNutricionistaService = require("../services/citaNutricionista.service");
 const { handleError } = require("../utils/errorHandler");
+const userservice = require("../services/user.service");
 
 /**
  * @name getCitaNutricioniosta
- * @description Obtiene todos los usuarios
+ * @description Obtiene todos las citas
  * @param req {Request}
  * @param res {Response}
  */
@@ -23,54 +24,55 @@ async function getCitaNutricionista(req, res) {
 
 /**
  * @name createCitaNutricionista
- * @description Crea un nuevo usuario
+ * @description Crea una nueva cita
  * @param req {Request}
  * @param res {Response}
  */
 async function createCitaNutricionista(req, res) {
   try {
-    const nuevoCitaNutricionista =
-      await CitaNutricionistaService.createCitaNutricionista(req.body);
-    nuevoCitaNutricionista === null
-      ? respondError(
-          req,
-          res,
-          400,
-          "Error en la validacion de datos",
-          "Bad Request",
-          { message: "Verifique los datos ingresados" },
-        )
-      : respondSuccess(req, res, 201, nuevoCitaNutricionista);
+    // const { id } = req.params;
+      const nuevoCitaNutricionista = await 
+      CitaNutricionistaService.createCitaNutricionista(req.body);
+      nuevoCitaNutricionista === null
+        ? respondError(
+            req,
+            res,
+            400,
+            "Error en la validacion de datos",
+            "Bad Request",
+            { message: "Verifique los datos ingresados" },
+          )
+        : respondSuccess(req, res, 201, nuevoCitaNutricionista);
   } catch (error) {
     handleError(
       error,
       "citaNutricionista.controller -> createCitaNutricionista",
     );
-    respondError(req, res, 500, "No se pudo crear el usuario");
+    respondError(req, res, 500, "No se pudo crear la cita");
   }
 }
 
 /**
  * @name getCitaNutricionistaById
- * @description Obtiene un usuario por su id
+ * @description Obtiene una cita por su id
  * @param req {Request}
  * @param res {Response}
  */
 async function getCitaNutricionistaById(req, res) {
   try {
     const { id } = req.params;
-
-    const cita = await CitaNutricionistaService.getCitaNutricionistaById(id);
-    cita === null
-      ? respondError(
-          req,
-          res,
-          404,
-          "No se encuentra cita solicitada",
-          "Not Found",
-          { message: "Verifique el id ingresado" },
-        )
-      : respondSuccess(req, res, 200, cita);
+    
+      const cita = await CitaNutricionistaService.getCitaNutricionistaById(id);
+      cita === null
+        ? respondError(
+            req,
+            res,
+            404,
+            "No se encuentra cita solicitada",
+            "Not Found",
+            { message: "Verifique el id ingresado" },
+          )
+        : respondSuccess(req, res, 200, cita);
   } catch (error) {
     handleError(
       error,
@@ -82,27 +84,27 @@ async function getCitaNutricionistaById(req, res) {
 
 /**
  * @name updateCitaNutricionista
- * @description Actualiza un usuario por su id
+ * @description Actualiza una cita por su id
  * @param req {Request}
  * @param res {Response}
  */
 async function updateCitaNutricionista(req, res) {
   try {
     const { id } = req.params;
-    const cita = await CitaNutricionistaService.updateCitaNutricionista(
-      id,
-      req.body,
-    );
-    cita === null
-      ? respondError(
-          req,
-          res,
-          404,
-          "No se encontro la cita solicitada",
-          "Not Found",
-          { message: "Verifique el id ingresado" },
-        )
-      : respondSuccess(req, res, 200, cita);
+      const cita = await CitaNutricionistaService.updateCitaNutricionista(
+        id,
+        req.body,
+      );
+      cita === null
+        ? respondError(
+            req,
+            res,
+            404,
+            "No se encontro la cita solicitada",
+            "Not Found",
+            { message: "Verifique el id ingresado" },
+          )
+        : respondSuccess(req, res, 200, cita);
   } catch (error) {
     handleError(
       error,
@@ -114,24 +116,24 @@ async function updateCitaNutricionista(req, res) {
 
 /**
  * @name deleteCitaNutricionista
- * @description Elimina un usuario por su id
+ * @description Elimina una cita por su id
  * @param req {Request}
  * @param res {Response}
  */
 async function deleteCitaNutricionista(req, res) {
   try {
     const { id } = req.params;
-    const cita = await CitaNutricionistaService.deleteCitaNutricionista(id);
-    cita === null
-      ? respondError(
-          req,
-          res,
-          404,
-          "No se encontro la cita solicitada",
-          "Not Found",
-          { message: "Verifique el id ingresado" },
-        )
-      : respondSuccess(req, res, 200, cita);
+      const cita = await CitaNutricionistaService.deleteCitaNutricionista(id);
+      cita === null
+        ? respondError(
+            req,
+            res,
+            404,
+            "No se encontro la cita solicitada",
+            "Not Found",
+            { message: "Verifique el id ingresado" },
+          )
+        : respondSuccess(req, res, 200, cita);
   } catch (error) {
     handleError(
       error,
