@@ -76,7 +76,7 @@ async function calculateAllStats(users) {
 */
 async function mostrarRegistros(id) {
   try {
-    const registros = await change.find({ _id: id });
+    const registros = await change.find({ id: id }).sort({ fechaUpdate: -1 });
     return registros;
   } catch (error) {
     handleError(error, "stats.service -> mostrarRegistros");

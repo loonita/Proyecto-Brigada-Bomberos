@@ -4,7 +4,7 @@ const User = require("../models/user.model.js");
 const Role = require("../models/role.model.js");
 const { handleError } = require("../utils/errorHandler");
 const { userBodySchema } = require("../schema/user.schema");
-const cambios = require("../services/stats.service.js");
+const cambios = require("../services/stats.service");
 
 /**
  * @typedef User
@@ -117,7 +117,7 @@ async function updateUser(id, user) {
     if (error) {
       return null;
     }
-    /*cambios.registrarCambios(id, user);*/
+    cambios.registrarCambios(id, user);
     return await User.findByIdAndUpdate(id, user);
   } catch (error) {
     handleError(error, "user.service -> updateUser");

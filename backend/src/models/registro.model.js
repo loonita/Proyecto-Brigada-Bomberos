@@ -4,14 +4,14 @@ const mongoose = require("mongoose");
 
 const registerSchema = new mongoose.Schema({
     id: {
-        type: Number,
+        type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     name: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     peso: {
         type: Number,
