@@ -3,8 +3,7 @@
 const User = require("../models/user.model.js");
 const _ = require("lodash");
 const { handleError } = require("../utils/errorHandler");
-const registrarCambios = [];
-const totalEdades = [];
+
 /**
  * @typedef User
  * @property {string} _id
@@ -21,7 +20,7 @@ const totalEdades = [];
 async function calculateUserStats(id) {
     try {
       const user = await User.findById(id);
-
+      
       const edad = new Date().getFullYear() - user.fechaNacimiento.getFullYear();
       totalEdades.push(edad);
       const peso = user.peso;
@@ -47,8 +46,12 @@ async function calculateUserStats(id) {
   */
 async function calculateAllStats(users) {
   try {
-    console.log(users);
-    const promedioEdad = _.sum(totalEdades) / totalEdades.length;
+    const sumaFechas = users.reduce((acc, user) => {
+      const edad = new Date().getFullYear() - user.fechaNacimiento.getFullYear();
+      return acc + edad;
+    }, 0);
+    
+    const promedioEdad = sumaFechas / users.length;
     const promedioAltura = _.sumBy(users, "altura") / users.length;
     const promedioPeso = _.sumBy(users, "peso") / users.length;
     const promedioIMC = promedioAltura / promedioPeso * promedioPeso;
@@ -64,17 +67,7 @@ async function calculateAllStats(users) {
   }
 }
 
-/**
- * @name registroCambio
- * @description Registra los cambios realizados en los usuarios
- * @param userparams {string} - Id del usuario
-*/
-function registroCambio(user) {
-    registrarCambios.push(user);
-}
-
 module.exports = {
     calculateUserStats,
     calculateAllStats,
-    registroCambio,
 };
