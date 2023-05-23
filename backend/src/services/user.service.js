@@ -4,13 +4,14 @@ const User = require("../models/user.model.js");
 const Role = require("../models/role.model.js");
 const { handleError } = require("../utils/errorHandler");
 const { userBodySchema } = require("../schema/user.schema");
+const registro = require("../services/stats.service.js"); 
 
 /**
  * @typedef User
  * @property {string} _id
  * @property {String} name
  * @property {String} email
- */
+*/
 
 /**
  * @name getUsers
@@ -48,7 +49,6 @@ async function createUser(user) {
       rut,
       domicilio,
     } = user;
-
     const userFound = await User.findOne({ email: user.email });
     if (userFound) return null;
 
@@ -100,6 +100,7 @@ async function updateUser(id, user) {
     if (error) {
       return null;
     }
+    registro.registroCambio(user);
     return await User.findByIdAndUpdate(id, user);
   } catch (error) {
     handleError(error, "user.service -> updateUser");
