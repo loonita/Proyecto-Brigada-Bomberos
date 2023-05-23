@@ -31,12 +31,10 @@ router.use(
   authMiddleware.verifyToken,
   citaPreparadorRoutes,
 );
-
 router.use(
   "/messages", 
   authMiddleware.verifyToken, roleRoutes,
   );
-
 router.use("/roles", authMiddleware.verifyToken, roleRoutes);
 
 // Exporta el enrutador

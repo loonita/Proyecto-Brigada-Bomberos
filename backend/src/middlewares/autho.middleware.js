@@ -36,7 +36,6 @@ async function isNutricionista(req, res, next) {
     handleError(error, "autho.middleware -> isNutricionista");
   }
 }
-
 async function isBrigadista(req, res, next) {
   try {
     const user = await User.findById(req.userId);
@@ -51,24 +50,6 @@ async function isBrigadista(req, res, next) {
     return respondError(req, res, 401, "Require bringadista!");
   } catch (error) {
     handleError(error, "autho.middleware -> isBringadista");
-  }
-}
-
-async function isNoB(req, res, next) {
-  try {
-    const user = await User.findById(req.userId);
-    const roles = await Role.find({ _id: { $in: user.roles } });
-    for (let i = 0; i < roles.length; i++) {
-      console.log(roles[i].name);
-      if (roles[i].name === "brigadista" || roles[i].name === "nutricionista" 
-      || roles[i].name === "admin") {
-        next();
-        return;
-      }
-    }
-    return respondError(req, res, 401, "Require bringadista o nutricionista!");
-  } catch (error) {
-    handleError(error, "autho.middleware -> isNoB");
   }
 }
 async function isPreparador(req, res, next) {
@@ -110,7 +91,6 @@ module.exports = {
   isAdmin,
   isNutricionista,
   isBrigadista,
-  isNoB,
   isPreparador,
   isPoB,
 };

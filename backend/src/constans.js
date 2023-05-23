@@ -5,6 +5,6 @@ const ROLES = [
   "nutricionista",
   "brigadista",
   "preparador_fisico",
-  "jefe_de_brigada",
+  "jefe de brigada",
 ];
 module.exports = { ROLES };
