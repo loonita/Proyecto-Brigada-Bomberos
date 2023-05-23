@@ -51,26 +51,8 @@ async function getAllUsers(req, res) {
 */
 async function getRegistro(req, res) {
     try {
-        const registro = await StatsService.registroCambio();
-        registro.length === 0
-            ? respondSuccess(req, res, 204)
-            : respondSuccess(req, res, 200, registro);
-    } catch (error) {
-        handleError(error, "stats.controller -> getRegistro");
-        respondError(req, res, 400, error.message);
-    }
-}
-
-/**
- * @name getRegistro
- * @description Funcion que obtiene el registro de cambios
- * @param req {Request}
- * @param res {Response}
- * @returns {Promise<{}|null>}
-*/
-async function getHistorico(req, res) {
-    try {
-        const registro = await StatsService.registroCambio(id);
+        const { id } = req.params;
+        const registro = await StatsService.mostrarRegistros(id);
         registro.length === 0
             ? respondSuccess(req, res, 204)
             : respondSuccess(req, res, 200, registro);
@@ -84,5 +66,4 @@ module.exports = {
     getOnlyUser,
     getAllUsers,
     getRegistro,
-    getHistorico,
 };

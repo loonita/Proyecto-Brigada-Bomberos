@@ -3,6 +3,7 @@
 const User = require("../models/user.model.js");
 const _ = require("lodash");
 const { handleError } = require("../utils/errorHandler");
+const change = require("../models/registro.model.js");
 
 /**
  * @typedef User
@@ -57,9 +58,9 @@ async function calculateAllStats(users) {
     const promedioIMC = promedioAltura / promedioPeso * promedioPeso;
     return {
       promedioEdad: promedioEdad,
-      promedioIMC: promedioIMC,
       promedioAltura: promedioAltura,
       promedioPeso: promedioPeso,
+      promedioIMC: promedioIMC,
     };
   } catch (err) {
     handleError(error, "stats.service -> calculateAllStats");
@@ -67,7 +68,52 @@ async function calculateAllStats(users) {
   }
 }
 
+/**
+ * @name mostrarRegistros
+ * @description Muestra los registros de un usuario
+ * @param id {string} - Id del usuario
+ * @returns {Promise<{}|null>}
+*/
+async function mostrarRegistros(id) {
+  try {
+    const registros = await change.find({ _id: id });
+    return registros;
+  } catch (error) {
+    handleError(error, "stats.service -> mostrarRegistros");
+  }
+}
+
+/**
+ * @name registrarCambios
+ * @description Registra los cambios de un usuario
+ * @param id {string} - Id del usuario
+ * @param user {User} - Objeto con los datos del usuario
+ * @returns {Promise<{}|null>}
+*/
+async function registrarCambios(id, user) {
+  try {
+    const cambios = new change({
+      id: id,
+      name: user.name,
+      email: user.email,
+      peso: user.peso,
+      altura: user.altura,
+      fechaNacimiento: user.fechaNacimiento,
+      genero: user.genero,
+      telefono: user.telefono,
+      domicilio: user.domicilio,
+      imc: user.imc,
+      fechaUpdate: new Date(),
+    });
+    return await cambios.save();
+  } catch (error) {
+    handleError(error, "stats.service -> registrarCambios");
+  }
+}
+
 module.exports = {
     calculateUserStats,
     calculateAllStats,
+    mostrarRegistros,
+    registrarCambios,
 };

@@ -9,6 +9,6 @@ const router = express.Router();
 // Define las rutas para los usuarios
 router.get("/:id", statsController.getOnlyUser);
 router.get("/", statsController.getAllUsers);
-router.get("/registro", statsController.getRegistro);
+router.get("/registro/:id", statsController.getRegistro);
 
 module.exports = router;
