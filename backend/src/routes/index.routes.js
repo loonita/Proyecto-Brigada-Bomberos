@@ -4,6 +4,8 @@ const userRoutes = require("./user.routes.js");
 const authRoutes = require("./auth.routes.js");
 // Importa el middleware de autenticación
 const authMiddleware = require("../middlewares/authe.middleware.js");
+// Importa el enrutador de estadisticas
+const statsRoutes = require("./stats.routes.js");
 
 const citaNutricionistaRoutes = require("./citaNutricionista.routes.js");
 const citaPreparadorRoutes = require("./citaPreparador.routes.js");
@@ -16,6 +18,7 @@ const router = express.Router();
 router.use("/users", authMiddleware.verifyToken, userRoutes);
 // Define las rutas para la autenticación /api/auth
 router.use("/auth", authRoutes);
+router.use("/stats", statsRoutes);
 
 router.use(
   "/citaNutricionista",
