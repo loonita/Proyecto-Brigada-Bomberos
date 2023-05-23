@@ -11,12 +11,6 @@ const telefono = Joi.string().min(9).max(9);
 const rut = Joi.string().min(7).max(9);
 const domicilio = Joi.string().min(3).max(40);
 const imc = Joi.number().min(0);
-// trabajo de noche
-const nombreEjercicio = Joi.string().min(3).max(30);
-const categoriaEjercicio = Joi.string().min(3).max(30);
-const enfoqueEjercicio = Joi.string().min(3).max(150);
-const seriesEjercicio = Joi.number().min(1);
-const repeticionesEjercicio = Joi.number().min(1);
 
 const userBodySchema = Joi.object({
   name: name.required(),
@@ -30,12 +24,6 @@ const userBodySchema = Joi.object({
   rut: rut.required(),
   domicilio: domicilio.required(),
   imc: imc.required(),
-  // trabajo de noche
-  nombreEjercicio: nombreEjercicio.required(),
-  categoriaEjercicio: categoriaEjercicio.required(),
-  enfoqueEjercicio: enfoqueEjercicio.required(),
-  seriesEjercicio: seriesEjercicio.required(),
-  repeticionesEjercicio: repeticionesEjercicio.required(),
 });
 
 const userBodyPutSchema = Joi.object({
@@ -50,12 +38,6 @@ const userBodyPutSchema = Joi.object({
   rut,
   domicilio,
   imc,
-  // trabajo de noche
-  nombreEjercicio,
-  categoriaEjercicio,
-  enfoqueEjercicio,
-  seriesEjercicio,
-  repeticionesEjercicio,
 });
 
 module.exports = { userBodySchema, userBodyPutSchema };

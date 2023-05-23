@@ -61,32 +61,6 @@ const userSchema = new mongoose.Schema({
     required: false,
     unique: false,
   },
-  // cambios de noche
-  nombreEjercicio: {
-    type: String,
-    ref: "User",
-    required: true,
-  },
-categoriaEjercicio: {
-    type: String,
-    ref: "User",
-    required: true,
-},
-enfoqueEjercicio: {
-    type: String,
-    ref: "User",
-    required: true,
-},
-seriesEjercicio: {
-    type: Number,
-    ref: "User",
-    required: true,
-},
-repeticionesEjercicio: {
-    type: Number,
-    ref: "User",
-    required: true,
-},
 });
 
 // Crea el modelo de datos 'User' a partir del esquema 'userSchema'
