@@ -41,7 +41,7 @@ const citaPreparadorSchema = new mongoose.Schema({
 
 const CitaPreparador = mongoose.model("CitaPreparador", citaPreparadorSchema);
 
-CitaPreparador.prototype.generarPDF = function () {
+CitaPreparador.prototype.generarPDF = function() {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument();
     const filePath = 'src/pdfs/archivo.pdf'; // Reemplaza 'ruta/al/archivo.pdf' por la ruta deseada donde se guardará el archivo PDF
