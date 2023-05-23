@@ -1,3 +1,4 @@
+const { Schema, model } = require("mongoose");
 const ROLES = [
   "user",
   "admin",
@@ -6,5 +7,4 @@ const ROLES = [
   "prepadador fisico",
   "jefe de brigada",
 ];
-
 module.exports = { ROLES };
