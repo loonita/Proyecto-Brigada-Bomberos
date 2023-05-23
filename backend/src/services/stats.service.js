@@ -47,6 +47,7 @@ async function calculateUserStats(id) {
   */
 async function calculateAllStats(users) {
   try {
+    console.log(users);
     const promedioEdad = _.sum(totalEdades) / totalEdades.length;
     const promedioAltura = _.sumBy(users, "altura") / users.length;
     const promedioPeso = _.sumBy(users, "peso") / users.length;

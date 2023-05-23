@@ -31,7 +31,7 @@ async function getOnlyUser(req, res) {
 */
 async function getAllUsers(req, res) {
     try {
-        const users = await User.find();
+        const users = await User.find({ roles: "6465c5b43b418716a7bbc51d" });
         const stats = await StatsService.calculateAllStats(users);
         stats.length === 0
             ? respondSuccess(req, res, 204)
