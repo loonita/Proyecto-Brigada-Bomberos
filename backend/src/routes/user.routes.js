@@ -12,8 +12,10 @@ const router = express.Router();
 
 // Define las rutas para los usuarios
 router.get("/", usuarioController.getUsers);
+router.get("/csv", usuarioController.getUsersCSV);
 router.post("/", authoMiddleware.isAdmin, usuarioController.createUser);
 router.get("/:id", usuarioController.getUserById);
+router.get("/csv/:id", usuarioController.getUserByIdCSV);
 router.put(
   "/:id",
   authoMiddleware.isNutricionista,

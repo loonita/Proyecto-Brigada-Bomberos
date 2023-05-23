@@ -41,12 +41,21 @@ async function createCitaNutricionista(citaNutricionista) {
     if (error) {
       return null;
     }
-    const { nutricionista, brigadista, fecha, invalid } = citaNutricionista;
+    const {
+      nutricionista,
+      brigadista,
+      fecha,
+      observaciones,
+      planAlimenticio,
+      invalid,
+    } = citaNutricionista;
 
     const newCitaNutricionista = new CitaNutricionista({
       nutricionista,
       brigadista,
       fecha,
+      observaciones,
+      planAlimenticio,
       invalid,
     });
     return await newCitaNutricionista.save();

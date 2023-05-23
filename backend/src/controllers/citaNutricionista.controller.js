@@ -6,7 +6,7 @@ const { handleError } = require("../utils/errorHandler");
 
 /**
  * @name getCitaNutricioniosta
- * @description Obtiene todos los usuarios
+ * @description Obtiene todos las citas
  * @param req {Request}
  * @param res {Response}
  */
@@ -23,7 +23,7 @@ async function getCitaNutricionista(req, res) {
 
 /**
  * @name createCitaNutricionista
- * @description Crea un nuevo usuario
+ * @description Crea una nueva cita
  * @param req {Request}
  * @param res {Response}
  */
@@ -52,7 +52,7 @@ async function createCitaNutricionista(req, res) {
 
 /**
  * @name getCitaNutricionistaById
- * @description Obtiene un usuario por su id
+ * @description Obtiene una cita por su id
  * @param req {Request}
  * @param res {Response}
  */
@@ -82,7 +82,7 @@ async function getCitaNutricionistaById(req, res) {
 
 /**
  * @name updateCitaNutricionista
- * @description Actualiza un usuario por su id
+ * @description Actualiza una cita por su id
  * @param req {Request}
  * @param res {Response}
  */
@@ -114,7 +114,7 @@ async function updateCitaNutricionista(req, res) {
 
 /**
  * @name deleteCitaNutricionista
- * @description Elimina un usuario por su id
+ * @description Elimina una cita por su id
  * @param req {Request}
  * @param res {Response}
  */
