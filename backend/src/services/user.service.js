@@ -54,8 +54,9 @@ async function createUser(user) {
     if (userFound) return null;
 
     // si un rol no es un id valido, retorna null
+    // regex: 24 caracteres alfanumericos, no se aceptan caracteres especiales
     for (let i = 0; i < roles.length; i++) {
-      if (!roles[i].match(/^[0-9a-fA-F]{24}$/)) {
+      if (!roles[i].match(/^[0-9a-zA-Z]{24}$/)) {
         return null;
       }
     }
@@ -112,7 +113,6 @@ async function getUserById(id) {
 async function updateUser(id, user) {
   try {
     const { error } = userBodySchema.validate(user);
-    console.log(user);
     user.imc = user.peso / (user.altura * user.altura);
     if (error) {
       return null;
