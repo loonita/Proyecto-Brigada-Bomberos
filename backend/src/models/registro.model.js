@@ -3,11 +3,6 @@
 const mongoose = require("mongoose");
 
 const registerSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: false,
-    },
     name: {
         type: String,
         required: true,

@@ -1,6 +1,6 @@
 "use strict";
 // Importa el modelo de datos 'User'
-const User = require("../models/user.model.js");
+const User = require("../models/user.model.js").default;
 const _ = require("lodash");
 const { handleError } = require("../utils/errorHandler");
 const change = require("../models/registro.model.js");
@@ -23,7 +23,6 @@ async function calculateUserStats(id) {
       const user = await User.findById(id);
       
       const edad = new Date().getFullYear() - user.fechaNacimiento.getFullYear();
-      totalEdades.push(edad);
       const peso = user.peso;
       const altura = user.altura / 100; // Convertir la altura de cm a m
       const imc = peso / (altura * altura);
@@ -90,10 +89,9 @@ async function mostrarRegistros(id) {
  * @param user {User} - Objeto con los datos del usuario
  * @returns {Promise<{}|null>}
 */
-async function registrarCambios(id, user) {
+async function registrarCambios(user) {
   try {
     const cambios = new change({
-      id: id,
       name: user.name,
       email: user.email,
       peso: user.peso,
