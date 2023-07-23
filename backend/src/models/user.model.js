@@ -61,14 +61,6 @@ const userSchema = new mongoose.Schema({
     required: false,
     unique: false,
   },
-  saveChanges:
-  [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Register",
-      required: false,
-    },
-  ],
 });
 
 // Crea el modelo de datos 'User' a partir del esquema 'userSchema'

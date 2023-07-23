@@ -1,6 +1,6 @@
 "use strict";
 // Importa el modelo de datos 'User'
-const User = require("../models/user.model.js").default;
+const User = require("../models/user.model.js");
 const _ = require("lodash");
 const { handleError } = require("../utils/errorHandler");
 const change = require("../models/registro.model.js");
@@ -75,7 +75,7 @@ async function calculateAllStats(users) {
 */
 async function mostrarRegistros(id) {
   try {
-    const registros = await change.find({ id: id }).sort({ fechaUpdate: -1 });
+    const registros = await change.find({ _id: id }).sort({ fechaUpdate: -1 });
     return registros;
   } catch (error) {
     handleError(error, "stats.service -> mostrarRegistros");
