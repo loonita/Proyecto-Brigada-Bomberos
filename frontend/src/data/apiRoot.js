@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const URL = "http://localhost:3010/api";
-const URL2 = "http://localhost:3010/api/Agendar";
-const URL3 = "http://localhost:3010/api/Agendar/1";
+const URL = "http://localhost:3000/api";
+const URL2 = "http://localhost:3000/api/Agendar";
+const URL3 = "http://localhost:3000/api/Agendar/1";
 
 export const getAgendar = async () => {
   try {
