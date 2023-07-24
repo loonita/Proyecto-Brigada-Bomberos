@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { createAgendar, getAgendar, deleteAgendar } from "@/data/agendarData";
+import { createAgendar, getCitas, deleteAgendar } from "@/data/agendarData";
 import { useRouter } from "next/navigation";
 
 const CreateButton = ({ id }) => {
@@ -58,7 +58,7 @@ export const AgendarList = () => {
   };
 
   useEffect(() => {
-    getAgendar().then((res) => {
+    getCitas().then((res) => {
       if (res.success) {
         setAgendar(res.data);
         console.log(res.data);

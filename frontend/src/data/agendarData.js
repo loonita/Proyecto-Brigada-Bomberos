@@ -1,8 +1,15 @@
 import axios from "@/data/apiRoot";
 
-export const getAgendar = async () => {
+export const getCitas = async () => {
   try {
-    const res = await axios.get("/Agendar");
+    const res = await axios.get("/citaNutricionista", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      params: {
+        email: "admin@email.com",
+      },
+    });
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
