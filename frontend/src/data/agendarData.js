@@ -1,8 +1,8 @@
-import axios from "@/data/apiRoot";
+import axios from "@/api/rootAPI";
 
-export const getAgendar = async () => {
+export const getCitas = async () => {
   try {
-    const res = await axios.get("/Agendar");
+    const res = await axios.get("/citaNutricionista");
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
