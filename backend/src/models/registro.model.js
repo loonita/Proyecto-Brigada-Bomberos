@@ -40,6 +40,11 @@ const registerSchema = new mongoose.Schema({
         type: Date,
         required: false,
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
 });
 
 // Crea el modelo de datos 'Role' a partir del esquema 'roleSchema'
