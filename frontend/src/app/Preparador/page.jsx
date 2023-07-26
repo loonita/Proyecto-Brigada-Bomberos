@@ -1,8 +1,26 @@
-import React from 'react'
+"use client"
+import {getPreparadores} from "@/data/preparadorData"
+import { useEffect } from "react"
+
 
 const Preparador = () => {
+
+  useEffect(() => {
+    getPreparadores().then((res) => {
+      console.log(res)
+    }
+    )
+  }, [])
+
+
+
   return (
-    <div><h1>Probando Preparador</h1></div>
+    <form>
+      <h1>Aqui se esta contruyendo Preaprador</h1>
+      <input placeholder="Escribe Titulo" />
+      <textarea placeholder="Escribe la descripcion" />
+      <button>Guardar</button>
+      </form>
   )
 }
 
