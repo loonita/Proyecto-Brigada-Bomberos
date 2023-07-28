@@ -3,6 +3,7 @@
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const UserService = require("../services/user.service");
 const { handleError } = require("../utils/errorHandler");
+const RoleService = require("../services/role.service");
 
 /**
  * @name getUsers
@@ -21,6 +22,34 @@ async function getUsers(req, res) {
   }
 }
 
+/**
+ * @name getBrigadistas
+ * @description Obtiene todos los brigadistas
+ * @param req {Request}
+ * @param res {Response}
+ */
+async function getBrigadistas(req, res) {
+  try {
+    const usuarios = await UserService.getUsers();
+    const brigadistas = [];
+    let count = 0;
+    for (let i = 0; i < usuarios.length; i++) {
+      const usuario = usuarios[i];
+      for (let j = 0; j < usuario.roles.length; j++) {
+        const role = await RoleService.getRoleById(usuario.roles[j]);
+        if (role.name === "brigadista") {
+          brigadistas[count] = usuario;
+          count++;
+        }
+      }
+    }
+    brigadistas.length === 0
+      ? respondSuccess(req, res, 204)
+      : respondSuccess(req, res, 200, brigadistas);
+  } catch (error) {
+    respondError(req, res, 400, error.message);
+  }
+}
 /**
  * @name createUser
  * @description Crea un nuevo usuario
@@ -227,6 +256,7 @@ async function deleteUser(req, res) {
 module.exports = {
   getUsers,
   getUsersCSV,
+  getBrigadistas,
   createUser,
   getUserById,
   getUserByIdCSV,
