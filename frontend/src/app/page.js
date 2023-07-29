@@ -3,55 +3,63 @@ import React from "react";
 import Logout from "@/components/Logout";
 import PrivateRoute from "@/components/PrivateRoute";
 import useAuth from "@/hooks/useAuth";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-} from "@chakra-ui/react";
+import { Box, VStack, Heading, Text, ChakraProvider, CSSReset } from "@chakra-ui/react";
+import Card from "@/components/card";
+import Menu from "@/components/menu";
 
-export default function Home() {
+function StyledButton(props) {
+  return (
+    <Box
+      as="button"
+      bg="gray.700"
+      color="white"
+      p={2}
+      borderRadius="md"
+      fontWeight="bold"
+      _hover={{ bg: "gray.600" }}
+      {...props}
+    />
+  );
+}
+
+function Home() {
   const { user } = useAuth();
 
   return (
-    <PrivateRoute>
-      <Heading>Brigada de Bomberos</Heading>
-      <Menu>
-        <MenuButton>MENU</MenuButton>
-        <MenuList>
-          <MenuItem as="a" href="/Perfil">
-            Perfil
-          </MenuItem>
-          <MenuItem as="a" href="/Agendar">
-            Agendamiento Nutricionista
-          </MenuItem>
-          <MenuItem as="a" href="/">
-            Agendamiento Fisico
-          </MenuItem>
-          <MenuItem as="a" href="/">
-            Estadisticas
-          </MenuItem>
-        </MenuList>
-      </Menu>
+    <ChakraProvider>
+      <CSSReset />
+      {/* Layout */}
+      <Box
+        minH="100vh"
+        bg="gray.800" // Color de fondo oscuro
+        color="white" // Color del texto en blanco para legibilidad
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <VStack spacing={6} align="center">
+          {/* Header */}
+          <Heading as="h1" fontSize="36px" fontWeight="bold">
+            Brigada de Bomberos
+          </Heading>
+          {/* Menu */}
+          <Menu />
+          <Box>
+            <Card bg="gray.700" p={4} w="100%">
+              <Text fontSize="18px" textAlign="center">
+                Iniciaste sesión como {user?.email}
+              </Text>
+            </Card>
+          </Box>
 
-      <Card>
-        <CardBody>
-          <Text>Iniciaste sesion como {user?.email}</Text>
-        </CardBody>
-      </Card>
-      <Logout />
-    </PrivateRoute>
+          {/* Logout Button */}
+          <StyledButton>
+            <Logout />
+          </StyledButton>
+        </VStack>
+      </Box>
+    </ChakraProvider>
   );
 }
+
+export default Home;

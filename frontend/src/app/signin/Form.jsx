@@ -34,8 +34,8 @@ export const Form = () => {
     <form onSubmit={handleSubmit}>
       <label>
         Correo electrónico:
-      </label>
         <input type="email" value={email} onChange={handleChangeEmail} />
+      </label>
       <button type="submit">Iniciar sesión</button>
     </form>
   );
