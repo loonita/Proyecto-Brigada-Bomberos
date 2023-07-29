@@ -1,9 +1,8 @@
-import './globals.css';
-import { Providers } from './provider';
-
+import "./globals.css";
+import { Providers } from "./provider";
 export const metadata = {
-  title: 'Frontend ISW',
-  description: 'Template para proyectos de frontend en ISW',
+  title: "Frontend ISW",
+  description: "Template para proyectos de frontend en ISW",
 };
 
 export default function RootLayout({ children }) {
@@ -14,4 +13,7 @@ export default function RootLayout({ children }) {
       </Providers>
     </html>
   );
+}
+export function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
 }
