@@ -34,6 +34,9 @@ export default function Home() {
           <MenuItem as="a" href="/Agendar">
             Agendar cita nutricionista
           </MenuItem>
+          <MenuItem as="a" href="/Preparador">
+            Agendar cita Preparador Fisico 
+          </MenuItem>
           <MenuItem as="a" href="sdff">
             Link 2
           </MenuItem>
