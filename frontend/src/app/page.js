@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Logout from "@/components/Logout";
 import PrivateRoute from "@/components/PrivateRoute";
 import useAuth from "@/hooks/useAuth";

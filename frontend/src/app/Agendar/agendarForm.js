@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Select } from "@chakra-ui/react";
+
 const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
-  const { title, description, selectedOption } = agendar; // Agrega el estado 'selectedOption' a tu objeto 'agendar'
+  const { title, description, selectedOption } = agendar;
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm">
