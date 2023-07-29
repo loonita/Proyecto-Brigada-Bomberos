@@ -17,7 +17,7 @@ const NewAgendar = () => {
     e.preventDefault();
     console.log(params);
     try {
-      await createAgendar(agendar);
+      await createCitas(agendar);
       push("/Agendar");
     } catch (err) {
       console.log(err);

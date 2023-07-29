@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { createAgendar, getCitas, deleteAgendar } from "@/data/agendarData";
+import { createAgendar, getCitas, deleteCita } from "@/data/agendarData";
 import { useRouter } from "next/navigation";
 
 const CreateButton = ({ id }) => {
@@ -27,12 +27,12 @@ const EditButton = ({ id }) => {
   );
 };
 
-const DeleteButton = ({ id, onAgendarDeleted }) => {
+const DeleteButton = ({ id, onCitaDeleted }) => {
   const { push } = useRouter();
   const handleDelete = async () => {
     try {
-      await deleteAgendar(id);
-      onAgendarDeleted();
+      await deleteCita(id);
+      onCitaDeleted();
       push("/Agendar/");
     } catch (err) {
       console.log(err);
@@ -50,17 +50,17 @@ const DeleteButton = ({ id, onAgendarDeleted }) => {
 };
 
 export const AgendarList = () => {
-  const [agendar, setAgendar] = useState([]);
-  const [agendarDeleted, setAgendarDeleted] = useState(false);
+  const [agendar, setagendar] = useState([]);
+  const [agendarDeleted, setagendarDeleted] = useState(false);
 
-  const handleAgendarDeleted = () => {
-    setAgendarDeleted(!agendarDeleted); // Invierte el valor de taskDeleted para desencadenar el efecto
+  const handleagendarDeleted = () => {
+    setagendarDeleted(!agendarDeleted); // Invierte el valor de taskDeleted para desencadenar el efecto
   };
 
   useEffect(() => {
     getCitas().then((res) => {
       if (res.success) {
-        setAgendar(res.data);
+        setagendar(res.data);
         console.log(res.data);
       }
     });
@@ -68,7 +68,7 @@ export const AgendarList = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Agendar</h1>
+      <h1 className="text-2xl font-bold mb-4">agendar</h1>
       {agendar.length > 0 ? (
         <ul className="space-y-4">
           {agendar?.map((agendar) => (
@@ -88,7 +88,7 @@ export const AgendarList = () => {
               />
               <DeleteButton
                 id={agendar._id}
-                onAgendarDeleted={handleAgendarDeleted}
+                onagendarDeleted={handleagendarDeleted}
               />
             </li>
           ))}

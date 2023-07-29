@@ -11,6 +11,21 @@ async function getRoles() {
   }
 }
 
+/**
+ * @name getRoleById
+ * @description Obtiene un role por su id
+ * @param id {string} - Id del role
+ * @returns {Promise<Role|null>}
+ */
+async function getRoleById(id) {
+  try {
+    return await Role.findById({ _id: id });
+  } catch (error) {
+    handleError(error, "role.service -> getRoleById");
+  }
+}
+
 module.exports = {
   getRoles,
+  getRoleById,
 };
