@@ -1,39 +1,43 @@
 import Link from "next/link";
 import { Select } from "@chakra-ui/react";
-import {useState, useEffect} from "react";
-import {getBrigadistas} from "../../data/agendarData";
+import { useState, useEffect } from "react";
+import { getBrigadistas } from "../../data/agendarData";
 
 const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
-  const { title, description, selectedOption } = agendar;
+  const { title, description, fecha, selectedOption } = agendar;
 
-  const [brigadistas, setBrigadistas] = useState([{
-    id: '',
-    nombre: '',
-    email: '',
-    roles: [],
-    peso: 0.0,
-    altura: 0.0,
-    fechaNacimiento: null,
-    genero: '',
-    telefono: '',
-    rut: '',
-    domicilio: '',
-    imc: 0.0
-  }])
+  const [brigadistas, setBrigadistas] = useState([
+    {
+      id: "",
+      nombre: "",
+      email: "",
+      roles: [],
+      peso: 0.0,
+      altura: 0.0,
+      fechaNacimiento: null,
+      genero: "",
+      telefono: "",
+      rut: "",
+      domicilio: "",
+      imc: 0.0,
+    },
+  ]);
 
   const options = () => {
-    return brigadistas.map(company => {
+    return brigadistas.map((company) => {
       return (
-          <option key={company._id} value={company._id}>{company.name}</option>
-      )
-    })
-  }
+        <option key={company._id} value={company._id}>
+          {company.name}
+        </option>
+      );
+    });
+  };
 
   useEffect(() => {
-    getBrigadistas().then(res => {
-      setBrigadistas(res.data)
-    })
-  }, [])
+    getBrigadistas().then((res) => {
+      setBrigadistas(res.data);
+    });
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm">
@@ -50,20 +54,18 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
           }
         >
           <option value="">Seleccionar nombre de brigadista</option>
-          { options() }
+          {options()}
         </select>
       </div>
       <div className="mb-6">
-        <label htmlFor="description" className="block  text-sm font-bold mb-2">
+        <label htmlFor="fecha" className="block  text-sm font-bold mb-2">
           Fecha
         </label>
         <textarea
-          id="description"
+          id="fecha"
           className="shadow appearance-none border rounded w-full py-2 font-bold px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={description}
-          onChange={(e) =>
-            setAgendar({ ...agendar, description: e.target.value })
-          }
+          value={fecha}
+          onChange={(e) => setAgendar({ ...agendar, fecha: e.target.value })}
         ></textarea>
       </div>
       <div className="mb-6">
