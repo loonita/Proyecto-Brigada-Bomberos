@@ -27,15 +27,21 @@ export default function Home() {
 
   return (
     <PrivateRoute>
-      <Heading>Home page</Heading>
+      <Heading>Brigada de Bomberos</Heading>
       <Menu>
         <MenuButton>MENU</MenuButton>
         <MenuList>
-          <MenuItem as="a" href="/Agendar">
-            Agendar cita nutricionista
+          <MenuItem as="a" href="/Perfil">
+            Perfil
           </MenuItem>
-          <MenuItem as="a" href="sdff">
-            Link 2
+          <MenuItem as="a" href="/Agendar">
+            Agendamiento Nutricionista
+          </MenuItem>
+          <MenuItem as="a" href="/">
+            Agendamiento Fisico
+          </MenuItem>
+          <MenuItem as="a" href="/">
+            Estadisticas
           </MenuItem>
         </MenuList>
       </Menu>

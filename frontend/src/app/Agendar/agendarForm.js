@@ -1,8 +1,39 @@
 import Link from "next/link";
 import { Select } from "@chakra-ui/react";
+import {useState, useEffect} from "react";
+import {getBrigadistas} from "../../data/agendarData";
 
 const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
   const { title, description, selectedOption } = agendar;
+
+  const [brigadistas, setBrigadistas] = useState([{
+    id: '',
+    nombre: '',
+    email: '',
+    roles: [],
+    peso: 0.0,
+    altura: 0.0,
+    fechaNacimiento: null,
+    genero: '',
+    telefono: '',
+    rut: '',
+    domicilio: '',
+    imc: 0.0
+  }])
+
+  const options = () => {
+    return brigadistas.map(company => {
+      return (
+          <option key={company._id} value={company._id}>{company.name}</option>
+      )
+    })
+  }
+
+  useEffect(() => {
+    getBrigadistas().then(res => {
+      setBrigadistas(res.data)
+    })
+  }, [])
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm">
@@ -19,9 +50,7 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
           }
         >
           <option value="">Seleccionar nombre de brigadista</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          { options() }
         </select>
       </div>
       <div className="mb-6">
