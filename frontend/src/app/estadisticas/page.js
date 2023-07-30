@@ -12,19 +12,23 @@ const StatsPage = () => {
   return (
     <section>
       <Box bg={"black"}>
-        <Heading>Estadísticas</Heading>
+        <Heading color={"white"}>Estadísticas</Heading>
       <Link href="/estadisticas/tablaBrigadistas">
-        <p color="white" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-          Estadísticas
-        </p>
+        <Box color={"white"}>
+          <p className="text-gray-300 hover:bg-white-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            Estadísticas
+          </p>
+        </Box>
       </Link>
       </Box>
       <Box bg={"black"}>
-        <Heading>Estadísticas</Heading>
-      <Link href="/getStatsUsers">
-        <p color="white" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-          Estadísticas de Brigadistas
-        </p>
+        <Heading color={"white"}>Estadísticas</Heading>
+      <Link href="/estadisticas/statsBrigadistas">
+        <Box color={"white"}>
+          <p color="white" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            Estadísticas de Brigadistas
+          </p>
+        </Box>
       </Link>
       </Box>
     </section> 
