@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Select } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { getBrigadistas } from "../../data/agendarData";
+import { getBrigadistas, getNutricionistas } from "../../data/agendarData";
 
 const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
   const { nutricionista, brigadista, fecha, observaciones, planAlimenticio } =
@@ -24,12 +24,39 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
     },
   ]);
 
-  const options = () => {
+  const [nutricionistas, setNutricionistas] = useState([
+    {
+      id: "",
+      nombre: "",
+      email: "",
+      roles: [],
+      peso: 0.0,
+      altura: 0.0,
+      fechaNacimiento: null,
+      genero: "",
+      telefono: "",
+      rut: "",
+      domicilio: "",
+      imc: 0.0,
+    },
+  ]);
+
+  const optionsBrigadistas = () => {
     return brigadistas.map((company) => {
       return (
         <option key={company._id} value={company._id}>
           {company.name}
         </option>
+      );
+    });
+  };
+
+  const optionsNutricionistas = () => {
+    return nutricionistas.map((company) => {
+      return (
+          <option key={company._id} value={company._id}>
+            {company.name}
+          </option>
       );
     });
   };
@@ -40,8 +67,30 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
     });
   }, []);
 
+  useEffect(() => {
+    getNutricionistas().then((res) => {
+      setNutricionistas(res.data);
+    });
+  }, []);
+
   return (
     <form onSubmit={handleSubmit} className="max-w-sm">
+      <div className="mb-4">
+        <label htmlFor="brigadista" className="block text-sm font-bold mb-2">
+          Nutricionista
+        </label>
+        <select
+            id="nutricionista"
+            className="shadow appearance-none border rounded w-full py-2 px-3 font-bold text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={nutricionista}
+            onChange={(e) =>
+                setAgendar({ ...agendar, nutricionista: e.target.value })
+            }
+        >
+          <option value="">Seleccionar nombre de nutricionista</option>
+          {optionsNutricionistas()}
+        </select>
+      </div>
       <div className="mb-4">
         <label htmlFor="brigadista" className="block text-sm font-bold mb-2">
           Brigadista
@@ -55,7 +104,7 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
           }
         >
           <option value="">Seleccionar nombre de brigadista</option>
-          {options()}
+          {optionsBrigadistas()}
         </select>
       </div>
       <div className="mb-6">

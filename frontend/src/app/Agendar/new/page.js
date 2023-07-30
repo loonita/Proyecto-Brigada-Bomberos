@@ -9,7 +9,7 @@ const NewAgendar = () => {
     brigadista: "",
     fecha: "",
     observaciones: "",
-    planAlimentacion: "",
+    planAlimenticio: "",
   });
 
   const params = useParams();
