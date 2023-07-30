@@ -1,101 +1,69 @@
-"use client";
 import { useEffect, useState } from "react";
-import { createAgendar, getCitas, deleteCita } from "@/data/agendarData";
-import { useRouter } from "next/navigation";
+import { Box, Text, VStack, Button } from "@chakra-ui/react";
+import { getCitas, deleteCita } from "@/data/agendarData";
+import { useRouter } from "next/router";
 
-const CreateButton = ({ id }) => {
-  const { push } = useRouter();
-  return (
-    <button
-      onClick={() => push(`/Agendar/${id}`)}
-      className="m-1 inline-block hover:bg-green-500 bg-green-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Crear
-    </button>
-  );
-};
+export const AgendarList = () => {
+  const [citas, setCitas] = useState([]);
+  useEffect(() => {
+    getCitas()
+      .then((res) => {
+        console.log(res);
+        if (res.state === "Success") {
+          setCitas(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error fetching citas: ", error);
+      });
+  }, []);
 
-const EditButton = ({ id }) => {
-  const { push } = useRouter();
-  return (
-    <button
-      onClick={() => push(`/Agendar/${id}`)}
-      className="m-1 inline-block hover:bg-green-500 bg-green-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Editar
-    </button>
-  );
-};
-
-const DeleteButton = ({ id, onCitaDeleted }) => {
-  const { push } = useRouter();
-  const handleDelete = async () => {
+  const handleDelete = async (citaId) => {
     try {
-      await deleteCita(id);
-      onCitaDeleted();
-      push("/Agendar/");
-    } catch (err) {
-      console.log(err);
+      await deleteCita(citaId);
+      setCitas((prevCita) => prevCita.filter((cita) => cita._id !== citaId));
+    } catch (error) {
+      console.log("Error deleting cita: ", error);
     }
   };
 
   return (
-    <button
-      onClick={handleDelete}
-      className="m-1 inline-block hover:bg-red-500 bg-red-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Eliminar
-    </button>
-  );
-};
-
-export const AgendarList = () => {
-  const [agendar, setagendar] = useState([]);
-  const [agendarDeleted, setagendarDeleted] = useState(false);
-
-  const handleagendarDeleted = () => {
-    setagendarDeleted(!agendarDeleted); // Invierte el valor de taskDeleted para desencadenar el efecto
-  };
-
-  useEffect(() => {
-    getCitas().then((res) => {
-      if (res.success) {
-        setagendar(res.data);
-        console.log(res.data);
-      }
-    });
-  }, [agendarDeleted]);
-
-  return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">agendar</h1>
-      {agendar.length > 0 ? (
-        <ul className="space-y-4">
-          {agendar?.map((agendar) => (
-            <li key={agendar._id}>
-              <h2 className="text-lg font-bold">{agendar.title}</h2>
-              <p>{agendar.description}</p>
-              <p>{agendar.date}</p>
-              <CreateButton
-                id={agendar._id}
-                title={agendar.title}
-                description={agendar.description}
-              />
-              <EditButton
-                id={agendar._id}
-                title={agendar.title}
-                description={agendar.description}
-              />
-              <DeleteButton
-                id={agendar._id}
-                onagendarDeleted={handleagendarDeleted}
-              />
-            </li>
-          ))}
-        </ul>
+    <VStack spacing={4} align="stretch">
+      {citas.length > 0 ? (
+        citas.map((cita) => (
+          <Box
+            key={cita._id}
+            p={4}
+            borderWidth="1px"
+            borderRadius="md"
+            boxShadow="md"
+          >
+            <Text fontSize="lg" fontWeight="bold">
+              {cita.title}
+            </Text>
+            <Text>Description: {cita.description}</Text>
+            <Text>Date: {cita.date}</Text>
+            <Text>Brigadista: {cita.brigadista}</Text>
+            <Text>Observaciones: {cita.observaciones}</Text>
+            <Text>Plan Alimenticio: {cita.planAlimenticio}</Text>
+            <Button colorScheme="blue" size="sm" mt={2} mr={2}>
+              Editar
+            </Button>
+            <Button
+              colorScheme="red"
+              size="sm"
+              mt={2}
+              onClick={() => handleDelete(cita._id)}
+            >
+              Eliminar
+            </Button>
+          </Box>
+        ))
       ) : (
-        <p>No hay citas disponibles.</p>
+        <Text>No hay citas disponibles.</Text>
       )}
-    </div>
+    </VStack>
   );
 };
+
+export default AgendarList;

@@ -8,8 +8,10 @@ const EditAgendar = () => {
   const params = useParams();
 
   const [agendar, setAgendar] = useState({
-    title: "",
-    description: "",
+    brigadista: "",
+    fecha: "",
+    observaciones: "",
+    planAlimenticio: "",
   });
 
   useEffect(() => {
