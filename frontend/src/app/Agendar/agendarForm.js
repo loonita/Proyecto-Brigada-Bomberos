@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { getBrigadistas } from "../../data/agendarData";
 
 const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
-  const { title, description, fecha, selectedOption } = agendar;
+  const { nutricionista, brigadista, fecha, observaciones, planAlimenticio } =
+    agendar;
 
   const [brigadistas, setBrigadistas] = useState([
     {
@@ -42,15 +43,15 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="max-w-sm">
       <div className="mb-4">
-        <label htmlFor="title" className="block text-sm font-bold mb-2">
+        <label htmlFor="brigadista" className="block text-sm font-bold mb-2">
           Brigadista
         </label>
         <select
-          id="selectedOption"
+          id="brigadista"
           className="shadow appearance-none border rounded w-full py-2 px-3 font-bold text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={selectedOption}
+          value={brigadista}
           onChange={(e) =>
-            setAgendar({ ...agendar, selectedOption: e.target.value })
+            setAgendar({ ...agendar, brigadista: e.target.value })
           }
         >
           <option value="">Seleccionar nombre de brigadista</option>
@@ -61,38 +62,43 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
         <label htmlFor="fecha" className="block  text-sm font-bold mb-2">
           Fecha
         </label>
-        <textarea
+        <input
+          type="date"
           id="fecha"
           className="shadow appearance-none border rounded w-full py-2 font-bold px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           value={fecha}
           onChange={(e) => setAgendar({ ...agendar, fecha: e.target.value })}
-        ></textarea>
+        ></input>
       </div>
       <div className="mb-6">
-        <label htmlFor="description" className="block  text-sm font-bold mb-2">
+        <label htmlFor="observaciones" className="block text-sm font-bold mb-2">
           Observaciones
         </label>
         <textarea
-          id="description"
+          id="observaciones"
           className="shadow appearance-none border rounded w-full py-2 font-bold px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={description}
+          value={observaciones}
           onChange={(e) =>
-            setAgendar({ ...agendar, description: e.target.value })
+            setAgendar({ ...agendar, observaciones: e.target.value })
           }
         ></textarea>
       </div>
 
       <div className="mb-6">
-        <label htmlFor="description" className="block  text-sm font-bold mb-2">
+        <label
+          htmlFor="planAlimenticio"
+          className="block  text-sm font-bold mb-2"
+        >
           Plan alimenticio
         </label>
         <textarea
-          id="description"
+          id="planAlimenticio"
           className="shadow appearance-none border rounded w-full py-2 font-bold px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={description}
-          onChange={(e) =>
-            setAgendar({ ...agendar, description: e.target.value })
-          }
+          value={planAlimenticio}
+          onChange={(e) => {
+            console.log(planAlimenticio);
+            setAgendar({ ...agendar, planAlimenticio: e.target.value });
+          }}
         ></textarea>
       </div>
 

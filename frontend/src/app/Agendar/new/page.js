@@ -2,12 +2,14 @@
 import { useState } from "react";
 import AgendarForm from "../agendarForm";
 import { useParams, useRouter } from "next/navigation";
-import { createAgendar } from "@/data/agendarData";
+import { createCita } from "@/data/agendarData";
 
 const NewAgendar = () => {
   const [agendar, setAgendar] = useState({
-    title: "",
-    description: "",
+    brigadista: "",
+    fecha: "",
+    observaciones: "",
+    planAlimentacion: "",
   });
 
   const params = useParams();
@@ -17,7 +19,7 @@ const NewAgendar = () => {
     e.preventDefault();
     console.log(params);
     try {
-      await createCitas(agendar);
+      await createCita(agendar);
       push("/Agendar");
     } catch (err) {
       console.log(err);
