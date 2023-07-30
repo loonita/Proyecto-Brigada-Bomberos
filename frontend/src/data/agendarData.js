@@ -26,6 +26,15 @@ export const getBrigadistas = async () => {
   }
 };
 
+export const getNutricionistas = async () => {
+  try {
+    const res = await axios.get("/users/nutricionistas", {});
+    return res.status === 200 ? res.data : { success: false, data: [] };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const createCita = async (agendar) => {
   try {
     const res = await axios.post("/citaNutricionista", agendar);

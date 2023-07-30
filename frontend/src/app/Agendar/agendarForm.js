@@ -1,10 +1,19 @@
 import Link from "next/link";
 import { Select } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { getBrigadistas } from "../../data/agendarData";
+import { getBrigadistas, getNutricionistas } from "../../data/agendarData";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+} from "@chakra-ui/react";
 
 const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
-  const { title, description, fecha, selectedOption } = agendar;
+  const { nutricionista, brigadista, fecha, observaciones, planAlimenticio } =
+    agendar;
 
   const [brigadistas, setBrigadistas] = useState([
     {
@@ -23,8 +32,35 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
     },
   ]);
 
-  const options = () => {
+  const [nutricionistas, setNutricionistas] = useState([
+    {
+      id: "",
+      nombre: "",
+      email: "",
+      roles: [],
+      peso: 0.0,
+      altura: 0.0,
+      fechaNacimiento: null,
+      genero: "",
+      telefono: "",
+      rut: "",
+      domicilio: "",
+      imc: 0.0,
+    },
+  ]);
+
+  const optionsBrigadistas = () => {
     return brigadistas.map((company) => {
+      return (
+        <option key={company._id} value={company._id}>
+          {company.name}
+        </option>
+      );
+    });
+  };
+
+  const optionsNutricionistas = () => {
+    return nutricionistas.map((company) => {
       return (
         <option key={company._id} value={company._id}>
           {company.name}
@@ -39,77 +75,115 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
     });
   }, []);
 
+  useEffect(() => {
+    getNutricionistas().then((res) => {
+      setNutricionistas(res.data);
+    });
+  }, []);
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm">
-      <div className="mb-4">
-        <label htmlFor="title" className="block text-sm font-bold mb-2">
-          Brigadista
-        </label>
-        <select
-          id="selectedOption"
-          className="shadow appearance-none border rounded w-full py-2 px-3 font-bold text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={selectedOption}
-          onChange={(e) =>
-            setAgendar({ ...agendar, selectedOption: e.target.value })
-          }
-        >
-          <option value="">Seleccionar nombre de brigadista</option>
-          {options()}
-        </select>
-      </div>
-      <div className="mb-6">
-        <label htmlFor="fecha" className="block  text-sm font-bold mb-2">
-          Fecha
-        </label>
-        <textarea
-          id="fecha"
-          className="shadow appearance-none border rounded w-full py-2 font-bold px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={fecha}
-          onChange={(e) => setAgendar({ ...agendar, fecha: e.target.value })}
-        ></textarea>
-      </div>
-      <div className="mb-6">
-        <label htmlFor="description" className="block  text-sm font-bold mb-2">
-          Observaciones
-        </label>
-        <textarea
-          id="description"
-          className="shadow appearance-none border rounded w-full py-2 font-bold px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={description}
-          onChange={(e) =>
-            setAgendar({ ...agendar, description: e.target.value })
-          }
-        ></textarea>
-      </div>
+    <Box p={4}>
+      <form onSubmit={handleSubmit}>
+        <FormControl mb={4}>
+          <FormLabel htmlFor="nutricionista" fontSize="sm" fontWeight="bold">
+            Nutricionista
+          </FormLabel>
+          <Select
+            id="nutricionista"
+            value={nutricionista}
+            onChange={(e) =>
+              setAgendar({ ...agendar, nutricionista: e.target.value })
+            }
+          >
+            <option value="">Seleccionar nombre de nutricionista</option>
+            {optionsNutricionistas()}
+          </Select>
+        </FormControl>
+        <FormControl mb={4}>
+          <FormLabel htmlFor="brigadista" fontSize="sm" fontWeight="bold">
+            Brigadista
+          </FormLabel>
+          <Select
+            id="brigadista"
+            value={brigadista}
+            onChange={(e) =>
+              setAgendar({ ...agendar, brigadista: e.target.value })
+            }
+          >
+            <option value="">Seleccionar nombre de brigadista</option>
+            {optionsBrigadistas()}
+          </Select>
+        </FormControl>
+        <FormControl mb={6}>
+          <FormLabel htmlFor="fecha" fontSize="sm" fontWeight="bold">
+            Fecha
+          </FormLabel>
+          <Input
+            type="date"
+            id="fecha"
+            value={fecha}
+            onChange={(e) => setAgendar({ ...agendar, fecha: e.target.value })}
+          />
+        </FormControl>
+        <FormControl mb={6}>
+          <FormLabel htmlFor="observaciones" fontSize="sm" fontWeight="bold">
+            Observaciones
+          </FormLabel>
+          <Textarea
+            id="observaciones"
+            value={observaciones}
+            onChange={(e) =>
+              setAgendar({ ...agendar, observaciones: e.target.value })
+            }
+          />
+        </FormControl>
+        <FormControl mb={6}>
+          <FormLabel htmlFor="planAlimenticio" fontSize="sm" fontWeight="bold">
+            Plan alimenticio
+          </FormLabel>
+          <Textarea
+            id="planAlimenticio"
+            value={planAlimenticio}
+            onChange={(e) =>
+              setAgendar({ ...agendar, planAlimenticio: e.target.value })
+            }
+          />
+        </FormControl>
 
-      <div className="mb-6">
-        <label htmlFor="description" className="block  text-sm font-bold mb-2">
-          Plan alimenticio
-        </label>
-        <textarea
-          id="description"
-          className="shadow appearance-none border rounded w-full py-2 font-bold px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={description}
-          onChange={(e) =>
-            setAgendar({ ...agendar, description: e.target.value })
-          }
-        ></textarea>
-      </div>
-
-      <div className="flex items-center justify-center">
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Guardar
-        </button>
-        <Link href="/Agendar">
-          <button className="inline-block hover:bg-red-500 bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Atras
-          </button>
-        </Link>
-      </div>
-    </form>
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <Button
+            type="submit"
+            bg="blue.500"
+            _hover={{ bg: "blue.700" }}
+            color="white"
+            fontWeight="bold"
+            py={2}
+            px={4}
+            rounded="md"
+            outline="none"
+            boxShadow="outline"
+            mr={4}
+          >
+            Guardar
+          </Button>
+          <Link href="/Agendar">
+            <Button
+              bg="red.700"
+              _hover={{ bg: "red.500" }}
+              color="white"
+              fontWeight="bold"
+              py={2}
+              px={4}
+              rounded="md"
+              outline="none"
+              boxShadow="outline"
+            >
+              Atras
+            </Button>
+          </Link>
+        </Box>
+      </form>
+    </Box>
   );
 };
 
