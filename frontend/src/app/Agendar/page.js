@@ -16,7 +16,7 @@ const Agendar = () => {
   return (
     <section>
       <Button />
-      <agendarList />
+      <AgendarList />
     </section>
   );
 };

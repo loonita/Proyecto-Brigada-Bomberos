@@ -49,7 +49,7 @@ const DeleteButton = ({ id, onCitaDeleted }) => {
   );
 };
 
-export const agendarList = () => {
+export const AgendarList = () => {
   const [agendar, setagendar] = useState([]);
   const [agendarDeleted, setagendarDeleted] = useState(false);
 

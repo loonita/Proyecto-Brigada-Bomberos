@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Providers } from "./provider";
 export const metadata = {
-  title: "Frontend ISW",
+  title: "Brigada",
   description: "Template para proyectos de frontend en ISW",
 };
 

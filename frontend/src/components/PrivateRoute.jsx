@@ -1,18 +1,24 @@
 'use client';
 import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
+import { React, Fragment } from 'react'
+import { Heading } from '@chakra-ui/react'
 
 const PrivateRoute = ({ children }) => {
   const { token } = useAuth();
 
-  // Si el usuario ha iniciado sesión, renderizar los componentes hijos
-  return <>{!token? <main>
-    <p>Debes iniciar sesion para ver esta pagina</p>
-    <br />
-    <Link href="/signin">
-      Ir al login 
-    </Link>
-  </main>:children}</>;
+  if (token) {
+    return children
+  } else {
+    return (
+        <Fragment>
+            <Heading><p>Debes iniciar sesion para ver esta pagina</p></Heading>
+            <Link href="/signin">
+                Ir al login
+            </Link>
+        </Fragment>
+    )
+  }
 };
 
 export default PrivateRoute;
