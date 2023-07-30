@@ -8,3 +8,4 @@ export const getPreparadores = async () => {
     console.log(err);
   }
 };
+
