@@ -32,11 +32,9 @@ export const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Correo electrónico:
+      <label color="white">
         <input type="email" value={email} onChange={handleChangeEmail} />
       </label>
-      <button type="submit">Iniciar sesión</button>
     </form>
   );
 };

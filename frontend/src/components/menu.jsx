@@ -20,7 +20,7 @@ export default function Menu() {
         <MenuItem as="a" href="/" color={"black"}>
           Agendamiento Físico
         </MenuItem>
-        <MenuItem as="a" href="/" color={"black"}>
+        <MenuItem as="a" href="/estadisticas" color={"black"}>
           Estadísticas
         </MenuItem>
       </MenuList>
