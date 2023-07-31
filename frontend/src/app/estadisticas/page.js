@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import {
   Heading,
@@ -10,7 +10,7 @@ import {
   Th,
   Td,
   TableCaption,
-  TableContainer
+  TableContainer,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { getBrigadistas } from "@/data/statsdata";
@@ -37,26 +37,47 @@ const StatsPage = () => {
         <Heading fontSize="3xl" textAlign="center">
           Estadísticas
         </Heading>
-        <Link href="/estadisticas/statsBrigadistas">
-          <Box
-            as="button"
-            bg="blue.500"
-            color="white"
-            borderRadius="md"
-            py={2}
-            px={4}
-            fontSize="md"
-            fontWeight="medium"
-            _hover={{ bg: "blue.600" }}
-            _active={{ bg: "blue.700" }}
-            _focus={{ outline: "none" }}
-            display="block"
-            width="fit-content"
-            mx="auto"
-          >
-            Ir a Gráficos
-          </Box>
-        </Link>
+        <br />
+        <Box display="flex" justifyContent="center" gap={4}>
+          <Link href="/estadisticas/statsBrigadistas">
+            <Box
+              as="button"
+              bg="blue.500"
+              color="white"
+              borderRadius="md"
+              py={2}
+              px={2}
+              fontSize="md"
+              fontWeight="medium"
+              _hover={{ bg: "blue.600" }}
+              _active={{ bg: "blue.700" }}
+              _focus={{ outline: "none" }}
+              display="block"
+              width="fit-content"
+            >
+              Ir a Gráficos
+            </Box>
+          </Link>
+          <Link href="/Registro">
+            <Box
+              as="button"
+              bg="blue.500"
+              color="white"
+              borderRadius="md"
+              py={2}
+              px={2}
+              fontSize="md"
+              fontWeight="medium"
+              _hover={{ bg: "blue.600" }}
+              _active={{ bg: "blue.700" }}
+              _focus={{ outline: "none" }}
+              display="block"
+              width="fit-content"
+            >
+              Ir a Registro
+            </Box>
+          </Link>
+        </Box>
       </Box>
 
       {/* Main content */}
