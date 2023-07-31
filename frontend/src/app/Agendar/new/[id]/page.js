@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import AgendarForm from "../../agendarForm";
 import { useParams, useRouter } from "next/navigation";
-import { updateAgendar, getAgendar } from "@/data/agendarData";
+import { getCita, updateCita } from "@/data/agendarData";
 
 const EditAgendar = () => {
   const params = useParams();
@@ -15,7 +15,7 @@ const EditAgendar = () => {
   });
 
   useEffect(() => {
-    getAgendar(params.id).then((res) => {
+    getCita(params.id).then((res) => {
       if (res.success) {
         setAgendar(res.data);
       }
@@ -27,7 +27,7 @@ const EditAgendar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateAgendar(params.id, agendar);
+      await updateCita(params.id, agendar);
       push("/Agendar");
     } catch (err) {
       console.log(err);
