@@ -14,14 +14,7 @@ const User = require("../models/user.model");
 async function getCitaPreparador(req, res) {
     try {
         const cita = await CitaPreparadorService.getCitaPreparador()
-        .populate({
-          path: 'preparador_fisico',
-          model: 'User'
-        })
-        .populate({
-          path: 'brigadista',
-          model: 'User'
-        });
+        
 
         cita.length == 0
             ? respondSuccess(res, res, 204)
