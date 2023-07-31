@@ -11,7 +11,7 @@ const cambios = require("../services/stats.service");
  * @property {string} _id
  * @property {String} name
  * @property {String} email
-*/
+ */
 
 /**
  * @name getUsers

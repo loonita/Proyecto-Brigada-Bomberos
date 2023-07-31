@@ -50,6 +50,36 @@ async function getBrigadistas(req, res) {
     respondError(req, res, 400, error.message);
   }
 }
+
+/**
+ * @name getNutricionistas
+ * @description Obtiene todos los nutricionistas
+ * @param req {Request}
+ * @param res {Response}
+ */
+async function getNutricionistas(req, res) {
+  try {
+    const usuarios = await UserService.getUsers();
+    const nutricionistas = [];
+    let count = 0;
+    for (let i = 0; i < usuarios.length; i++) {
+      const usuario = usuarios[i];
+      for (let j = 0; j < usuario.roles.length; j++) {
+        const role = await RoleService.getRoleById(usuario.roles[j]);
+        if (role.name === "nutricionista") {
+          nutricionistas[count] = usuario;
+          count++;
+        }
+      }
+    }
+    nutricionistas.length === 0
+      ? respondSuccess(req, res, 204)
+      : respondSuccess(req, res, 200, nutricionistas);
+  } catch (error) {
+    respondError(req, res, 400, error.message);
+  }
+}
+
 /**
  * @name createUser
  * @description Crea un nuevo usuario
@@ -257,6 +287,7 @@ module.exports = {
   getUsers,
   getUsersCSV,
   getBrigadistas,
+  getNutricionistas,
   createUser,
   getUserById,
   getUserByIdCSV,

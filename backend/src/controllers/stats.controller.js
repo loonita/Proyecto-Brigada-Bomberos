@@ -10,17 +10,17 @@ const User = require("../models/user.model");
  * @description Funcion que obtiene las estadisticas de los usuarios
  * @param req {Request}
  * @param res {Response}
-*/
+ */
 async function getOnlyUser(req, res) {
-    try {
-        const { id } = req.params;
-        const stats = await StatsService.calculateUserStats(id);
-        stats.length === 0
-            ? respondSuccess(req, res, 204)
-            : respondSuccess(req, res, 200, stats);
-    } catch (error) {
-        respondError(req, res, 400, error.message);
-    }
+  try {
+    const { id } = req.params;
+    const stats = await StatsService.calculateUserStats(id);
+    stats.length === 0
+      ? respondSuccess(req, res, 204)
+      : respondSuccess(req, res, 200, stats);
+  } catch (error) {
+    respondError(req, res, 400, error.message);
+  }
 }
 
 /**
@@ -28,18 +28,18 @@ async function getOnlyUser(req, res) {
  * @description Funcion que obtiene las estadisticas de los usuarios
  * @param req {Request}
  * @param res {Response}
-*/
+ */
 async function getAllUsers(req, res) {
-    try {
-        const users = await User.find({ roles: "6465c5b43b418716a7bbc51d" });
-        const stats = await StatsService.calculateAllStats(users);
-        stats.length === 0
-            ? respondSuccess(req, res, 204)
-            : respondSuccess(req, res, 200, stats);
-    } catch (error) {
-        handleError(error, "stats.controller -> getAllUsers");
-        respondError(req, res, 400, error.message);
-    }
+  try {
+    const users = await User.find({ roles: "6465c5b43b418716a7bbc51d" });
+    const stats = await StatsService.calculateAllStats(users);
+    stats.length === 0
+      ? respondSuccess(req, res, 204)
+      : respondSuccess(req, res, 200, stats);
+  } catch (error) {
+    handleError(error, "stats.controller -> getAllUsers");
+    respondError(req, res, 400, error.message);
+  }
 }
 
 /**
@@ -48,22 +48,22 @@ async function getAllUsers(req, res) {
  * @param req {Request}
  * @param res {Response}
  * @returns {Promise<{}|null>}
-*/
+ */
 async function getRegistro(req, res) {
-    try {
-        const { id } = req.params;
-        const registro = await StatsService.mostrarRegistros(id);
-        registro.length === 0
-            ? respondSuccess(req, res, 204)
-            : respondSuccess(req, res, 200, registro);
-    } catch (error) {
-        handleError(error, "stats.controller -> getRegistro");
-        respondError(req, res, 400, error.message);
-    }
+  try {
+    const { id } = req.params;
+    const registro = await StatsService.mostrarRegistros(id);
+    registro.length === 0
+      ? respondSuccess(req, res, 204)
+      : respondSuccess(req, res, 200, registro);
+  } catch (error) {
+    handleError(error, "stats.controller -> getRegistro");
+    respondError(req, res, 400, error.message);
+  }
 }
 
 module.exports = {
-    getOnlyUser,
-    getAllUsers,
-    getRegistro,
+  getOnlyUser,
+  getAllUsers,
+  getRegistro,
 };

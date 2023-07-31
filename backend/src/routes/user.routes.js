@@ -15,6 +15,7 @@ const router = express.Router();
 router.get("/", usuarioController.getUsers);
 router.get("/csv", usuarioController.getUsersCSV);
 router.get("/brigadistas", usuarioController.getBrigadistas);
+router.get("/nutricionistas", usuarioController.getNutricionistas)
 router.post("/", authoMiddleware.isAdmin, usuarioController.createUser);
 router.get("/:id", usuarioController.getUserById);
 router.get("/csv/:id", usuarioController.getUserByIdCSV);
