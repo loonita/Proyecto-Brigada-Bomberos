@@ -25,7 +25,7 @@ export const getUsuarios = async () => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const getBrigadistas = async () => {
   try {

@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import { getUsuarios } from "../../data/agendarData";
 
 const EditButton = ({ id }) => {
+  const { push } = useRouter();
   return (
-    <Link href={`/Agendar/`}>
-      <div className="m-1 inline-block hover:bg-green-500 bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Editar
-      </div>
-    </Link>
+    <button
+      onClick={() => push(`/Agendar/new/${id}`)}
+      className="m-1 inline-block hover:bg-green-500 bg-green-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Editar
+    </button>
   );
 };
 
@@ -95,13 +97,13 @@ export const AgendarList = () => {
             <Text fontSize="lg" fontWeight="bold">
               {cita.title}
             </Text>
-            <Text>id: {cita._id} </Text>
             <Text>
               Nutricionista:{" "}
-              {usuarios.find((u) => u._id === cita.nutricionista).name}
+              {usuarios.find((u) => u._id === cita.nutricionista)?.name}
             </Text>
             <Text>
-              Brigadista: {usuarios.find((u) => u._id === cita.brigadista).name}
+              Brigadista:{" "}
+              {usuarios.find((u) => u._id === cita.brigadista)?.name}
             </Text>
             <Text>fecha: {cita.fecha}</Text>
             <Text>Observaciones: {cita.observaciones}</Text>
