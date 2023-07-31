@@ -24,14 +24,6 @@ const citaNutricionistaSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  observaciones: {
-    type: String,
-    required: false,
-  },
-  planAlimenticio: {
-    type: String,
-    required: false,
-  },
   invalid: {
     type: Boolean,
     default: false,
