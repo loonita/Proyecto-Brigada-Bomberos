@@ -3,7 +3,7 @@ import { Box, Text, VStack, Button } from "@chakra-ui/react";
 import { getCitas, deleteCita } from "@/data/agendarData";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getUsuarios } from "../../data/agendarData";
+import { getUsuarios } from "@/data/agendarData";
 
 const EditButton = ({ id }) => {
   const { push } = useRouter();
