@@ -1,79 +1,161 @@
-'use client'
-import { useEffect, useState } from 'react';
-import { Box, Button, Heading, VStack } from '@chakra-ui/react';
-import { Line } from 'react-chartjs-2';
-import { useClient } from 'next/client'
-import axios from 'axios';
+"use client"
+import React, { useEffect, useState } from "react";
+import {
+  Heading,
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Select,
+} from "@chakra-ui/react";
+import Link from "next/link";
+import { getBrigadistas } from "@/data/agendarData";
+import { useRouter } from "next/router";
+import { Bar } from "react-chartjs-2";
 
-const CombinedPage = () => {
-    const isClient = useClient(); // Verifica si el componente se está ejecutando en el cliente
+const StatsPage = () => {
+  const [brigadistas, setBrigadistas] = useState([]);
+  const [selectedBrigadista, setSelectedBrigadista] = useState(null);
+  const [chartData, setChartData] = useState(null);
 
-    const [users, setUsers] = useState([]);
-    const [selectedUserId, setSelectedUserId] = useState(null);
-    const [userData, setUserData] = useState(null);
-
-    useEffect(() => {
-        // Actualiza el título del documento usando la API del navegador
-        document.title = 'Estadísticas de brigadistas';
-        if (isClient) {
-            fetchUsers();
+  useEffect(() => {
+    getBrigadistas()
+      .then((res) => {
+        if (res.state === "Success") {
+          setBrigadistas(res.data);
         }
-    }, []);
+      })
+      .catch((error) => {
+        console.log("Error fetching brigadistas: ", error);
+      });
+  }, []);
 
-    const fetchUser = async (id) => {
-        try {
-            const response = await axios.get(`/api/stats/${id}`);
-            setUserData(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+  useEffect(() => {
+    if (selectedBrigadista) {
+      // Fetch data for the selected brigadista and update the chart data
+      getChartData(selectedBrigadista.value);
+    }
+  }, [selectedBrigadista]);
 
-    const handleUserSelect = (id) => {
-        setSelectedUserId(id);
-        fetchUser(id);
-    };
+  const handleBrigadistaChange = (selectedOption) => {
+    setSelectedBrigadista(selectedOption);
+  };
+
+  const getChartData = (brigadistaId) => {
+    // Fetch data for the selected brigadista from the API
+    // and update the chart data.
+    // For simplicity, I'll use random data here.
+    const labels = ["Peso", "Altura", "IMC"];
+    const data = [getRandomValue(), getRandomValue(), getRandomValue()];
+    setChartData({
+      labels: labels,
+      datasets: [
+        {
+          label: "Estadísticas",
+          data: data,
+          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    });
+  };
+
+  const getRandomValue = () => {
+    return Math.floor(Math.random() * 100);
+  };
 
   return (
-    <VStack spacing={4}>
-      {selectedUserId ? (
-        <Box>
-          <Heading as="h1" size="lg" mb={4}>
-            {userData?.user.name}
-          </Heading>
-          {userData ? (
-            <Box width="100%">
-              <Line
-                data={{
-                  labels: ['Atributo 1', 'Atributo 2', 'Atributo 3'], // Reemplaza con los atributos reales
-                  datasets: [
-                    {
-                      label: 'Valores',
-                      data: [userData.stats.attr1, userData.stats.attr2, userData.stats.attr3], // Reemplaza con los atributos reales
-                      borderColor: 'rgba(75, 192, 192, 1)',
-                      borderWidth: 2,
-                      fill: false,
-                    },
-                  ],
-                }}
-              />
+    <div style={{ background: "#1a202c", minHeight: "100vh", color: "#fff" }}>
+      {/* Header section */}
+      <Box bg={"black"} p={4}>
+        <Heading fontSize="3xl" textAlign="center">
+          Estadísticas
+        </Heading>
+      </Box>
+
+      {/* Main content */}
+      <Box p={4}>
+        <Link href="/estadisticas/statsBrigadistas">
+          <Box
+            as="button"
+            bg="blue.500"
+            color="white"
+            borderRadius="md"
+            py={2}
+            px={4}
+            fontSize="md"
+            fontWeight="medium"
+            _hover={{ bg: "blue.600" }}
+            _active={{ bg: "blue.700" }}
+            _focus={{ outline: "none" }}
+            display="block"
+            width="fit-content"
+            mx="auto"
+          >
+            Ir a Gráficos
+          </Box>
+        </Link>
+
+        <br />
+
+        {/* Dropdown Select */}
+        <Select
+          options={brigadistas.map((brigadista) => ({
+            value: brigadista._id,
+            label: brigadista.name,
+          }))}
+          value={selectedBrigadista}
+          onChange={handleBrigadistaChange}
+          placeholder="Seleccione un brigadista..."
+        />
+
+        {selectedBrigadista ? (
+          <>
+            {/* Table */}
+            <TableContainer>
+              <Table>
+                <TableCaption>Estadísticas de {selectedBrigadista.label}</TableCaption>
+                <Thead>
+                  <Tr>
+                    <Th>Métrica:</Th>
+                    <Th>Valor:</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Peso:</Td>
+                    <Td>{getRandomValue()}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Altura:</Td>
+                    <Td>{getRandomValue()}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>IMC:</Td>
+                    <Td>{getRandomValue()}</Td>
+                  </Tr>
+                  {/* Add more metrics here if needed */}
+                </Tbody>
+              </Table>
+            </TableContainer>
+
+            {/* Chart */}
+            <Box mt={4}>
+              {chartData && <Bar data={chartData} />}
             </Box>
-          ) : (
-            <div>Loading...</div>
-          )}
-          <Button onClick={() => setSelectedUserId(null)}>Volver a la selección de usuario</Button>
-        </Box>
-      ) : (
-        <VStack spacing={4}>
-          {users.map((user) => (
-            <Button key={user._id} onClick={() => handleUserSelect(user._id)} variant="outline">
-              {user.name}
-            </Button>
-          ))}
-        </VStack>
-      )}
-    </VStack>
+          </>
+        ) : (
+          <p>Seleccione un brigadista para ver sus estadísticas.</p>
+        )}
+      </Box>
+    </div>
   );
 };
 
-export default CombinedPage;
+export default StatsPage;

@@ -1,37 +1,102 @@
-'use client';
-import React, { useEffect } from "react";
-import { Box, Heading } from "@chakra-ui/react";
-import Link from "next/link"; // Importa el componente Link de Next.js
+"use client";
+import React, { useEffect, useState } from "react";
+import {
+  Heading,
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer
+} from "@chakra-ui/react";
+import Link from "next/link";
+import { getBrigadistas } from "@/data/statsdata";
 
 const StatsPage = () => {
+  const [brigadistas, setBrigadistas] = useState([]);
+
   useEffect(() => {
-    // Actualiza el título del documento usando la API del navegador
-    document.title = "Estadísticas";
+    getBrigadistas()
+      .then((res) => {
+        if (res.state === "Success") {
+          setBrigadistas(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error fetching brigadistas: ", error);
+      });
   }, []);
 
   return (
-    <section>
-      <Box bg={"black"}>
-        <Heading color={"white"}>Estadísticas</Heading>
-      <Link href="/estadisticas/tablaBrigadistas">
-        <Box color={"white"}>
-          <p className="text-gray-300 hover:bg-white-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-            Estadísticas
-          </p>
-        </Box>
-      </Link>
+    <div style={{ background: "#1a202c", minHeight: "100vh", color: "#fff" }}>
+      {/* Header section */}
+      <Box bg={"blue.900"} p={4}>
+        <Heading fontSize="3xl" textAlign="center">
+          Estadísticas
+        </Heading>
+        <Link href="/estadisticas/statsBrigadistas">
+          <Box
+            as="button"
+            bg="blue.500"
+            color="white"
+            borderRadius="md"
+            py={2}
+            px={4}
+            fontSize="md"
+            fontWeight="medium"
+            _hover={{ bg: "blue.600" }}
+            _active={{ bg: "blue.700" }}
+            _focus={{ outline: "none" }}
+            display="block"
+            width="fit-content"
+            mx="auto"
+          >
+            Ir a Gráficos
+          </Box>
+        </Link>
       </Box>
-      <Box bg={"black"}>
-        <Heading color={"white"}>Estadísticas</Heading>
-      <Link href="/estadisticas/statsBrigadistas">
-        <Box color={"white"}>
-          <p color="white" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-            Estadísticas de Brigadistas
-          </p>
-        </Box>
-      </Link>
+
+      {/* Main content */}
+      <Box p={4}>
+        <br />
+        {brigadistas.length > 0 ? (
+          <TableContainer>
+            <Table>
+              <TableCaption>Brigadistas</TableCaption>
+              <Thead>
+                <Tr>
+                  <Th>Nombre:</Th>
+                  <Th>Email:</Th>
+                  <Th>Peso:</Th>
+                  <Th>Altura:</Th>
+                  <Th>Fecha Nacimiento:</Th>
+                  <Th>Género:</Th>
+                  <Th>IMC:</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {brigadistas.map((brigadista) => (
+                  <Tr key={brigadista._id}>
+                    <Td>{brigadista.name}</Td>
+                    <Td>{brigadista.email}</Td>
+                    <Td>{brigadista.peso}</Td>
+                    <Td>{brigadista.altura}</Td>
+                    <Td>{brigadista.fechaNacimiento}</Td>
+                    <Td>{brigadista.genero}</Td>
+                    <Td>{brigadista.imc}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        ) : (
+          <p>No hay brigadistas registrados</p>
+        )}
       </Box>
-    </section> 
+    </div>
   );
 };
 
