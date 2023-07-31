@@ -1,5 +1,6 @@
 "use strict";
 // Importa el modelo de datos 'User'
+const User = require("../models/user.model.js");
 const Role = require("../models/role.model.js");
 const CitaPreparador = require("../models/citaPreparador.model.js");
 const { handleError } = require("../utils/errorHandler");
@@ -21,7 +22,12 @@ const {
  */
 async function getCitaPreparador() {
   try {
-    return await CitaPreparador.find();
+    return await CitaPreparador.find()
+    .populate({
+      path: 'brigadista',
+      model: User,
+    })
+    .exec();
   } catch (error) {
     handleError(error, "citaPreparador.service -> getCitaPreparador");
   }

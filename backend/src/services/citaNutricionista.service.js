@@ -1,5 +1,6 @@
 "use strict";
 // Importa el modelo de datos 'User'
+
 const Role = require("../models/role.model.js");
 const CitaNutricionista = require("../models/citaNutricionista.model.js");
 const { handleError } = require("../utils/errorHandler");
@@ -107,10 +108,9 @@ async function deleteCitaNutricionista(id) {
   try {
     return await CitaNutricionista.findByIdAndDelete(id);
   } catch (error) {
-    handleError(error, "citaNutricionista.service -> deleteCitaNutricionista");
+    handleError(error, "CitaNutricionista.service -> deleteCitaNutricionista");
   }
 }
-
 module.exports = {
   getCitaNutricionista,
   createCitaNutricionista,

@@ -3,6 +3,7 @@
 const {respondSuccess, respondError} = require("../utils/resHandler"); // se importa la funcion respondSuccess y respondError del archivo resHandler.js
 const CitaPreparadorService = require("../services/citaPreparador.service"); // se importa el modelo de datos "CitaPreparador" del archivo citaPreparador.model.js
 const { handleError} = require("../utils/errorHandler"); // se importa la funcion handleErrors del archivo errorHandler.js
+const User = require("../models/user.model");
 
 /**
  * @name getCitaPreparador
@@ -12,7 +13,9 @@ const { handleError} = require("../utils/errorHandler"); // se importa la funcio
  */
 async function getCitaPreparador(req, res) {
     try {
-        const cita = await CitaPreparadorService.getCitaPreparador();
+        const cita = await CitaPreparadorService.getCitaPreparador()
+        
+
         cita.length == 0
             ? respondSuccess(res, res, 204)
             : respondSuccess(res, res, 200, cita);
@@ -59,7 +62,7 @@ async function createCitaPreparador(req, res) {
 async function getCitaPreparadorById(req, res) {
     try {
       const { id } = req.params;
-  
+
       const cita = await CitaPreparadorService.getCitaPreparadorById(id);
       cita === null
         ? respondError(
