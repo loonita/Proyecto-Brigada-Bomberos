@@ -18,17 +18,23 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import { getBrigadistas, getAllUsers } from "@/data/statsdata";
+import { getBrigadistas } from "@/data/agendarData";
 
 Chart.register(...registerables);
 
-function getImc(peso, altura) {
-  return peso / (altura * altura);
-}
-
 const StatsBrigadistas = () => {
   const [brigadistas, setBrigadistas] = useState([]);
-  const [statsGenerales, setStatsGenerales] = useState([]);
+
+  const [statsGenerale, setStatsGenerale] = useState({
+    promedioEdad: 0.0,
+    promedioAltura: 0.0,
+    promedioPeso: 0.0,
+    promedioIMC: 0.0,
+  });
+
+  const getImc = (peso, altura) => {
+    return peso / (altura * altura);
+  };
 
   const [brigadista, setBrigadista] = useState({
     id: "",
@@ -53,16 +59,9 @@ const StatsBrigadistas = () => {
         backgroundColor: ["rgba(75, 192, 192, 0.6)", "rgba(54, 162, 235, 0.6)", "rgba(255, 206, 86, 0.6)"],
         borderColor: ["rgba(75, 192, 192, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"],
         borderWidth: 1,
-        data: [brigadista.peso, brigadista.altura, getImc(brigadista.peso, brigadista.altura)],
+        data: [brigadista.peso, brigadista.altura, brigadista.imc],
       },
     ],
-  });
-
-  const [ statsGenerale , setStatsGenerale] = useState({
-    promedioEdad: 0.0,
-    promedioAltura: 0.0,
-    promedioPeso: 0.0,
-    promedioIMC: 0.0,
   });
 
   const [chartGenerales, setChartGenerales] = useState({
@@ -70,13 +69,28 @@ const StatsBrigadistas = () => {
     datasets: [
       {
         label: "Estadísticas Generales",
-        backgroundColor: ["rgba(75, 192, 192, 0.6)", "rgba(54, 162, 235, 0.6)", "rgba(255, 206, 86, 0.6)", "rgba(153, 102, 255, 0.6)"],
-        borderColor: ["rgba(75, 192, 192, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(153, 102, 255, 1)"],
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+          "rgba(255, 206, 86, 0.6)",
+          "rgba(153, 102, 255, 0.6)",
+        ],
+        borderColor: [
+          "rgba(75, 192, 192, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
         borderWidth: 1,
-        data: [statsGenerale.promedioEdad, statsGenerale.promedioAltura, statsGenerale.promedioPeso, statsGenerale.promedioIMC],
+        data: [
+          statsGenerale.promedioEdad,
+          statsGenerale.promedioAltura,
+          statsGenerale.promedioPeso,
+          statsGenerale.promedioIMC,
+        ],
       },
     ],
-  }); 
+  });
 
   const optionsBrigadistas = () => {
     return brigadistas.map((brigadista) => {
@@ -86,13 +100,38 @@ const StatsBrigadistas = () => {
         </option>
       );
     });
-  };
+  };  
 
+  const calculateStatsGenerales = (brigadistas) => {
+    const totalBrigadistas = brigadistas.length;
+
+    const sumEdad = brigadistas.reduce((acc, brigadista) => acc + brigadista.edad, 0);
+    const sumAltura = brigadistas.reduce((acc, brigadista) => acc + brigadista.altura, 0);
+    const sumPeso = brigadistas.reduce((acc, brigadista) => acc + brigadista.peso, 0);
+    brigadistas.forEach((brigadista) => {
+      brigadista.imc = getImc(brigadista.peso, brigadista.altura);
+    });
+    
+    const sumImc = brigadistas.reduce((acc, brigadista) => acc + brigadista.imc, 0);
+  
+    const promedioEdad = sumEdad / totalBrigadistas;
+    const promedioAltura = sumAltura / totalBrigadistas;
+    const promedioPeso = sumPeso / totalBrigadistas;
+    const promedioIMC = sumImc / totalBrigadistas;
+
+    return {
+      promedioEdad,
+      promedioAltura,
+      promedioPeso,
+      promedioIMC,
+    };
+  };
+  
   useEffect(() => {
-    getAllUsers().then((res) => {
-      const users = res.data;
-      const calculatedStats = getAllUsers(users);
-      setStatsGenerales(calculatedStats);
+    getBrigadistas().then((res) => {
+      setBrigadistas(res.data);
+      const statsGenerales = calculateStatsGenerales(res.data);
+      setStatsGenerale(statsGenerales);
     });
   }, []);
   
@@ -108,7 +147,7 @@ const StatsBrigadistas = () => {
       datasets: [
         {
           ...chartData.datasets[0],
-          data: [brigadista.peso, brigadista.altura, getImc(brigadista.peso, brigadista.altura)],
+          data: [brigadista.peso, brigadista.altura, brigadista.imc],
         },
       ],
     });
@@ -172,7 +211,7 @@ const StatsBrigadistas = () => {
           }}
         />
       </Box>
-      <Heading>Estadísticas Generales</Heading> 
+      <Heading>Estadísticas Generales</Heading>
       <Box mt={4}>
         <Bar
           data={chartGenerales}
