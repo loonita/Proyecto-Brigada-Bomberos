@@ -58,7 +58,7 @@ const StatsPage = () => {
               Ir a Gráficos
             </Box>
           </Link>
-          <Link href="/Registro">
+          <Link href="/estadisticas/Registro">
             <Box
               as="button"
               bg="blue.500"
@@ -83,8 +83,7 @@ const StatsPage = () => {
       {/* Main content */}
       <Box p={4}>
         <br />
-        {brigadistas.length > 0 ? (
-          <TableContainer>
+        <TableContainer>
             <Table>
               <TableCaption>Brigadistas</TableCaption>
               <Thead>
@@ -113,9 +112,6 @@ const StatsPage = () => {
               </Tbody>
             </Table>
           </TableContainer>
-        ) : (
-          <p>No hay brigadistas registrados</p>
-        )}
       </Box>
     </div>
   );

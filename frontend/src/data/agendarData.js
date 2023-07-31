@@ -17,6 +17,7 @@ export const getCita = async (id) => {
     console.log(err);
   }
 };
+
 export const getBrigadistas = async () => {
   try {
     const res = await axios.get("/users/brigadistas", {});
