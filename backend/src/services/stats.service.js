@@ -23,7 +23,6 @@ async function calculateUserStats(id) {
       const user = await User.findById(id);
       
       const edad = new Date().getFullYear() - user.fechaNacimiento.getFullYear();
-      totalEdades.push(edad);
       const peso = user.peso;
       const altura = user.altura / 100; // Convertir la altura de cm a m
       const imc = peso / (altura * altura);
@@ -76,7 +75,7 @@ async function calculateAllStats(users) {
 */
 async function mostrarRegistros(id) {
   try {
-    const registros = await change.find({ id: id }).sort({ fechaUpdate: -1 });
+    const registros = await change.find({ _id: id }).sort({ fechaUpdate: -1 });
     return registros;
   } catch (error) {
     handleError(error, "stats.service -> mostrarRegistros");
@@ -90,10 +89,9 @@ async function mostrarRegistros(id) {
  * @param user {User} - Objeto con los datos del usuario
  * @returns {Promise<{}|null>}
 */
-async function registrarCambios(id, user) {
+async function registrarCambios(user) {
   try {
     const cambios = new change({
-      id: id,
       name: user.name,
       email: user.email,
       peso: user.peso,
