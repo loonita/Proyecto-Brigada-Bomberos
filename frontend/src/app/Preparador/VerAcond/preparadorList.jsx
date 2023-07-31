@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { Box, Text, VStack, Button } from "@chakra-ui/react";
 import { getPreparadores } from "@/data/preparadorData";
+import BotonPreElim from "@/components/BotonPreElim";
+import BotonPreMod from "@/components/BotonPreMod";
 
 const PreparadorList = () => {
   const [citasPre, setcitasPre] = useState([]);
@@ -36,8 +38,12 @@ const PreparadorList = () => {
             <Text>Observaciones: {citaP.nombreEjercicio}</Text>
             <Text>categoria Ejercicio: {citaP.categoriaEjercicio}</Text>
             <Text>enfoque Ejercicio: {citaP.enfoqueEjercicio}</Text>
-            <Text>serie Ejercicio: {citaP.seriesEjercicio}</Text>
+            <Text>series Ejercicio: {citaP.seriesEjercicio}</Text>
             <Text>repeticiones Ejercicio: {citaP.repeticionesEjercicio}</Text>
+            <Box>
+              <BotonPreMod id={citaP._id} />
+              <BotonPreElim id={citaP._id} />
+            </Box>
           </Box>
         ))
       ) : (

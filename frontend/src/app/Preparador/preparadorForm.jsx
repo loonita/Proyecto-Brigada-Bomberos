@@ -7,13 +7,13 @@ import { getBrigadistas, getPreparador } from "../../data/preparadorData";
 
 const PreparadorForm = ({ crear, setCrear, handleSubmit }) => {
   const {
-    preparador,
+    preparador_fisico,
     brigadista,
     fecha,
     nombreEjercicio,
     categoriaEjercicio,
     enfoqueEjercicio,
-    serieEjercicio,
+    seriesEjercicio,
     repeticionesEjercicio,
   } = crear || {};
 
@@ -26,8 +26,8 @@ const PreparadorForm = ({ crear, setCrear, handleSubmit }) => {
           </FormLabel>
           <Input
             id="preparador_fisico"
-            value={preparador}
-            onChange={(e) => setCrear({ ...crear, preparador: e.target.value })}
+            value={preparador_fisico}
+            onChange={(e) => setCrear({ ...crear, preparador_fisico: e.target.value })}
           />
         </FormControl>
         <FormControl mb={4}>
@@ -82,13 +82,13 @@ const PreparadorForm = ({ crear, setCrear, handleSubmit }) => {
           />
         </FormControl>
         <FormControl mb={6}>
-          <FormLabel htmlFor="serieEjercicio" fontSize="sm" fontWeight="bold">
+          <FormLabel htmlFor="seriesEjercicio" fontSize="sm" fontWeight="bold">
             Serie del Ejercicio
           </FormLabel>
           <Input
-            id="serieEjercicio"
-            value={serieEjercicio}
-            onChange={(e) => setCrear({ ...crear, serieEjercicio: e.target.value })}
+            id="seriesEjercicio"
+            value={seriesEjercicio}
+            onChange={(e) => setCrear({ ...crear, seriesEjercicio: e.target.value })}
           />
         </FormControl>
         <FormControl mb={6}>

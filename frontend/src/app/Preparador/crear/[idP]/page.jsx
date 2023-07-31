@@ -8,13 +8,13 @@ const EditCrear = () => {
   const params = useParams();
 
   const [crear, setCrear] = useState({
-    preparador: "",
+    preparador_fisico: "",
     brigadista: "",
     fecha: "",
     nombreEjercicio: "",
     categoriaEjercicio: "",
     enfoqueEjercicio: "",
-    serieEjercicio: "",
+    seriesEjercicio: "",
     repeticionesEjercicio: "",
   });
 

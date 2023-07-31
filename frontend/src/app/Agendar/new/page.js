@@ -17,7 +17,7 @@ const NewAgendar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(params);
+    console.log(agendar);
     try {
       await createCita(agendar);
       push("/Agendar");

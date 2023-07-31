@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Select } from "@chakra-ui/react";
 import PreparadorForm from "../preparadorForm";
 import { useParams, useRouter } from "next/navigation";
+import { createCita } from "@/data/preparadorData";
 import {
     Box,
     Button,
@@ -18,13 +19,13 @@ import {
 
   const CrearAcondic = () => {
     const [crear, setCrear] = useState({
-        preparador: "",
+        preparador_fisico: "",
         brigadista: "",
         fecha: "",
         nombreEjercicio: "",
         categoriaEjercicio: "",
         enfoqueEjercicio: "",
-        serieEjercicio: "",
+        seriesEjercicio: "",
         repeticionesEjercicio: "",
     });
   
@@ -35,8 +36,8 @@ import {
       e.preventDefault();
       console.log(params);
       try {
-        await createCitaP(crearP);
-        push("/Preparador");
+        await createCita(crear);
+        push("/Preparador/VerAcond");
       } catch (err) {
         console.log(err);
       }
@@ -44,8 +45,8 @@ import {
 
   return (
     <PreparadorForm
-      crearP={crear}
-      setCrearP={setCrear}
+      crear={crear}
+      setCrear={setCrear}
       handleSubmit={handleSubmit}
     />
   );
