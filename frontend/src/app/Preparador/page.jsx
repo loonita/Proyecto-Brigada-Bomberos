@@ -1,27 +1,32 @@
 "use client"
-import {getPreparadores} from "@/data/preparadorData"
-import { useEffect } from "react"
+import React from "react";
+import { Box, Button, VStack } from "@chakra-ui/react";
+import Link from "next/link";
+
+const Preparador = () => (
+  <div>
+    <Box bg='#FFA570' w='100%' p={4} color='white'>
+      <h1>Preparador Fisico</h1>
+      </Box>
+    <Box bg="gray.800" color="white" p={4} minHeight="100vh">
+    <VStack spacing={4} align="stretch">
+      <Link href="/Preparador/VerAcond" passHref>
+        <Button as="a" colorScheme="green" variant="outline">
+          Ver Acondicionamiento de Brigadista
+        </Button>
+      </Link>
+      <Link href="/Preparador/crear" passHref>
+        <Button as="a" colorScheme="green" variant="outline">
+          Crear cita Brigadista a Brigadista
+        </Button>
+      </Link>
+    </VStack>
+  </Box>
+  </div>
+  
+);
+
+export default Preparador;
 
 
-const Preparador = () => {
-
-  useEffect(() => {
-    getPreparadores().then((res) => {
-      console.log(res)
-    }
-    )
-  }, [])
-
-
-
-  return (
-    <form>
-      <h1>Aqui se esta contruyendo Preaprador</h1>
-      <input placeholder="Escribe Titulo" />
-      <textarea placeholder="Escribe la descripcion" />
-      <button>Guardar</button>
-      </form>
-  )
-}
-
-export default Preparador
+//a

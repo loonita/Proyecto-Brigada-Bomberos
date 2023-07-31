@@ -7,19 +7,34 @@ import AgendarList from "./agendarList";
 const CreateButton = () => {
   return (
     <Flex justifyContent="center" alignItems="center" height="100vh" mt="-20%">
-      <Link href="/Agendar/new">
+      <Link href="/Agendar/new/">
         <Button
           colorScheme="teal"
           size="sm"
           borderRadius="md"
-          px={3}
-          py={2}
+          px={2}
+          py={4}
           fontSize="sm"
           fontWeight="medium"
           _hover={{ bg: "teal.600" }}
           _focus={{ boxShadow: "outline" }}
         >
           Crear cita
+        </Button>
+      </Link>
+      <Link href="/Home">
+        <Button
+          colorScheme="red"
+          size="sm"
+          borderRadius="md"
+          px={2}
+          py={4}
+          fontSize="sm"
+          fontWeight="medium"
+          _hover={{ bg: "teal.600" }}
+          _focus={{ boxShadow: "outline" }}
+        >
+          Atras
         </Button>
       </Link>
     </Flex>

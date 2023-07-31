@@ -17,8 +17,8 @@ export default function Menu() {
         <MenuItem as="a" href="/Agendar" color={"black"}>
           Agendamiento Nutricionista
         </MenuItem>
-        <MenuItem as="a" href="/" color={"black"}>
-          Agendamiento Físico
+        <MenuItem as="a" href="/Preparador" color={"black"}>
+          Preparador
         </MenuItem>
         <MenuItem as="a" href="/estadisticas" color={"black"}>
           Estadísticas

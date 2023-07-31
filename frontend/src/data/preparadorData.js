@@ -1,17 +1,17 @@
 import axios from "@/api/rootAPI";
 
-export const getCitas = async () => {
+export const getPreparadores = async () => {
   try {
-    const res = await axios.get("/citaNutricionista", {});
+    const res = await axios.get("/citaPreparador");
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
   }
 };
 
-export const getCita = async (id) => {
+export const getPreparador = async (id) => {
   try {
-    const res = await axios.get(`/citaNutricionista/${id}`);
+    const res = await axios.get(`/citaPreparador/${id}`);
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
@@ -27,37 +27,28 @@ export const getBrigadistas = async () => {
   }
 };
 
-export const getNutricionistas = async () => {
+export const getPreparadorU = async () => {
   try {
-    const res = await axios.get("/users/nutricionistas", {});
+    const res = await axios.get("/users/preparador", {});
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
   }
 };
 
-export const createCita = async (agendar) => {
+export const createCitaP = async (crearP) => {
   try {
-    const res = await axios.post("/citaNutricionista", agendar);
+    const res = await axios.post("/citaPreparador", crearP);
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
   }
 };
 
-export const updateCita = async (id, agendar) => {
+export const updateCitaP = async (id, crearP) => {
   try {
-    const res = await axios.put(`/citaNutricionista/${id}`, agendar);
+    const res = await axios.put(`/citaNutricionista/${id}`, crearP);
     return res.status === 200 ? res.data : { success: false, data: [] };
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const deleteCita = async (id) => {
-  try {
-    const res = await axios.delete(`/citaNutricionista/${id}`);
-    return res.data;
   } catch (err) {
     console.log(err);
   }
