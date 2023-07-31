@@ -35,3 +35,21 @@ export const getPreparadorU = async () => {
     console.log(err);
   }
 };
+
+export const createCitaP = async (crearP) => {
+  try {
+    const res = await axios.post("/citaPreparador", crearP);
+    return res.status === 200 ? res.data : { success: false, data: [] };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateCitaP = async (id, crearP) => {
+  try {
+    const res = await axios.put(`/citaNutricionista/${id}`, crearP);
+    return res.status === 200 ? res.data : { success: false, data: [] };
+  } catch (err) {
+    console.log(err);
+  }
+};
