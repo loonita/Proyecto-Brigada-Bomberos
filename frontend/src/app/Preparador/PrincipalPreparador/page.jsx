@@ -29,7 +29,7 @@ const PrincipalPreparador = () => {
   return (
     <html>
       <body>
-      <Box bg='tomato' w='100%' p={4} color='white'>
+      <Box bg='#FFA570' w='100%' p={4} color='white'>
          Bievenido Preparador Fisico
       </Box>
 

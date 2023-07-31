@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Preparador = () => (
   <div>   
-    <Box bg='tomato' w='100%' p={4} color='white'>
+    <Box bg='#FFA570' w='100%' p={4} color='white'>
       <h1>Preparador Fisico</h1>
       </Box>
     <Box bg="gray.800" color="white" p={4} minHeight="100vh">
