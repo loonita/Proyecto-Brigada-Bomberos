@@ -71,6 +71,7 @@ export const deleteCita = async (id) => {
     console.log(err);
   }
 };
+// @/data/agendarData.js
 
 export const getUserByIdCSV = async (id) => {
   try {
@@ -79,8 +80,11 @@ export const getUserByIdCSV = async (id) => {
 
     const csvData =
       "Nombre,RUT,Email,Domicilio,Telefono,Fecha Nacimiento,Genero,Peso,Altura,IMC\n" +
-      `${user.name},${user.rut},${user.email},${user.domicilio},${user.telefono},${user.fechaNacimiento},${user.genero},${user.peso},${user.altura},${user.imc}\n`;
-
+      `${user.name || ""},${user.rut || ""},${user.email || ""},${
+        user.domicilio || ""
+      },${user.telefono || ""},${user.fechaNacimiento || ""},${
+        user.genero || ""
+      },${user.peso || ""},${user.altura || ""},${user.imc || ""}\n`;
     return csvData;
   } catch (err) {
     console.log(err);
