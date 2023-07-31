@@ -4,7 +4,7 @@ import { Box, Button, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 
 const Preparador = () => (
-  <div>
+  <div>   
     <Box bg='tomato' w='100%' p={4} color='white'>
       <h1>Preparador Fisico</h1>
       </Box>
