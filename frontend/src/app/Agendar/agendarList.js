@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Text, VStack, Button } from "@chakra-ui/react";
 import { getCitas, deleteCita } from "@/data/agendarData";
-import { useRouter } from "next/router";
 
 export const AgendarList = () => {
   const [citas, setCitas] = useState([]);
