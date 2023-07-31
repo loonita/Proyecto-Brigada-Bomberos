@@ -56,7 +56,7 @@ export const updateCita = async (id, agendar) => {
 export const deleteCita = async (id) => {
   try {
     const res = await axios.delete(`/citaNutricionista/${id}`);
-    return res.status === 200 ? res.data : { success: false, data: [] };
+    return res.data;
   } catch (err) {
     console.log(err);
   }

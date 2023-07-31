@@ -12,14 +12,29 @@ const CreateButton = () => {
           colorScheme="teal"
           size="sm"
           borderRadius="md"
-          px={3}
-          py={2}
+          px={2}
+          py={4}
           fontSize="sm"
           fontWeight="medium"
           _hover={{ bg: "teal.600" }}
           _focus={{ boxShadow: "outline" }}
         >
           Crear cita
+        </Button>
+      </Link>
+      <Link href="/Home">
+        <Button
+          bg="red.700"
+          _hover={{ bg: "red.500" }}
+          color="white"
+          fontWeight="bold"
+          py={2}
+          px={4}
+          rounded="md"
+          outline="none"
+          boxShadow="outline"
+        >
+          Atras
         </Button>
       </Link>
     </Flex>
