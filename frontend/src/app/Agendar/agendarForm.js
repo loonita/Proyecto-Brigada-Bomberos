@@ -82,13 +82,13 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
   }, []);
 
   return (
-    <Box p={4}>
+    <Box p={4} bg="#313236"> {/* Cambio de color de fondo a negro (#313236) */}
       <form onSubmit={handleSubmit}>
-        <FormControl mb={4}>
+        <FormControl mb={4} color={"white"}>
           <FormLabel htmlFor="nutricionista" fontSize="sm" fontWeight="bold">
             Nutricionista
           </FormLabel>
-          <Select
+          <Select color={"black"}
             id="nutricionista"
             value={nutricionista}
             onChange={(e) =>
@@ -99,11 +99,11 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
             {optionsNutricionistas()}
           </Select>
         </FormControl>
-        <FormControl mb={4}>
+        <FormControl mb={4} color={"white"}>
           <FormLabel htmlFor="brigadista" fontSize="sm" fontWeight="bold">
             Brigadista
           </FormLabel>
-          <Select
+          <Select color={"black"}
             id="brigadista"
             value={brigadista}
             onChange={(e) =>
@@ -113,23 +113,23 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
             <option value="">Seleccionar nombre de brigadista</option>
             {optionsBrigadistas()}
           </Select>
-        </FormControl>
-        <FormControl mb={6}>
+        </FormControl >
+        <FormControl mb={6} color={"white"}>
           <FormLabel htmlFor="fecha" fontSize="sm" fontWeight="bold">
             Fecha
           </FormLabel>
-          <Input
+          <Input 
             type="date"
             id="fecha"
             value={fecha}
             onChange={(e) => setAgendar({ ...agendar, fecha: e.target.value })}
           />
         </FormControl>
-        <FormControl mb={6}>
+        <FormControl mb={6} color={"white"}>
           <FormLabel htmlFor="observaciones" fontSize="sm" fontWeight="bold">
             Observaciones
           </FormLabel>
-          <Textarea
+          <Textarea 
             id="observaciones"
             value={observaciones}
             onChange={(e) =>
@@ -137,11 +137,11 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
             }
           />
         </FormControl>
-        <FormControl mb={6}>
+        <FormControl mb={6} color={"white"}>
           <FormLabel htmlFor="planAlimenticio" fontSize="sm" fontWeight="bold">
             Plan alimenticio
           </FormLabel>
-          <Textarea
+          <Textarea 
             id="planAlimenticio"
             value={planAlimenticio}
             onChange={(e) =>

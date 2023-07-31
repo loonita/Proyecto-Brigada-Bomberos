@@ -3,6 +3,7 @@
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const UserService = require("../services/user.service");
 const { handleError } = require("../utils/errorHandler");
+const { registrarCambios } = require("../services/stats.service");
 const RoleService = require("../services/role.service");
 
 /**
@@ -241,6 +242,7 @@ async function updateUser(req, res) {
   try {
     const { id } = req.params;
     const user = await UserService.updateUser(id, req.body);
+    registrarCambios(user);
     user === null
       ? respondError(
           req,
