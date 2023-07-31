@@ -3,7 +3,7 @@ import { Box, Text, VStack, Button } from "@chakra-ui/react";
 import { getCitas, deleteCita } from "@/data/agendarData";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { set } from "mongoose";
+import { getUsuarios } from "../../data/agendarData";
 
 const EditButton = ({ id }) => {
   return (
@@ -40,11 +40,13 @@ const DeleteButton = ({ id, onCitaDeleted }) => {
 
 export const AgendarList = () => {
   const [citas, setCitas] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+
   const router = useRouter();
   useEffect(() => {
     getCitas()
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         if (res.state === "Success") {
           setCitas(res.data);
         }
@@ -54,14 +56,25 @@ export const AgendarList = () => {
       });
   }, []);
 
+  useEffect(() => {
+    getUsuarios()
+      .then((res) => {
+        if (res.state === "Success") {
+          setUsuarios(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error fetching usuarios: ", error);
+      });
+  }, []);
+
   const handleDelete = async (citaId) => {
     setCitas(citas.filter((cita) => cita._id !== citaId));
   };
 
-  const getNutricionista = async (nutricionistaId) => {
+  const getUsuario = async (id) => {
     try {
-      const nutricionista = await getNutricionista(nutricionistaId);
-      return nutricionista.nombre; // Assuming the response contains the name property
+      console.log(usuarios);
     } catch (error) {
       console.log("Error fetching nutricionista name: ", error);
       return "Unknown Nutricionista";
@@ -83,8 +96,13 @@ export const AgendarList = () => {
               {cita.title}
             </Text>
             <Text>id: {cita._id} </Text>
-            <Text>Nutricionista: {cita.nutricionista}</Text>
-            <Text>Brigadista: {cita.brigadista}</Text>
+            <Text>
+              Nutricionista:{" "}
+              {usuarios.find((u) => u._id === cita.nutricionista).name}
+            </Text>
+            <Text>
+              Brigadista: {usuarios.find((u) => u._id === cita.brigadista).name}
+            </Text>
             <Text>fecha: {cita.fecha}</Text>
             <Text>Observaciones: {cita.observaciones}</Text>
             <Text>Plan Alimenticio: {cita.planAlimenticio}</Text>
