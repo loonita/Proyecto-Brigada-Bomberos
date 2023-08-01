@@ -9,15 +9,16 @@ const CreateButton = () => {
     <Flex justifyContent="center" alignItems="center" height="100vh" mt="-20%">
       <Link href="/Agendar/new/">
         <Button
-          colorScheme="teal"
+          colorScheme="yellow" // Use the yellow color for the create button
           size="sm"
           borderRadius="md"
           px={2}
           py={4}
           fontSize="sm"
           fontWeight="medium"
-          _hover={{ bg: "teal.600" }}
+          _hover={{ bg: "#FFA570" }} // Change the hover color to the lighter shade of yellow
           _focus={{ boxShadow: "outline" }}
+          mr={4} // Add some spacing between the buttons
         >
           Crear cita
         </Button>
@@ -31,7 +32,7 @@ const CreateButton = () => {
           py={4}
           fontSize="sm"
           fontWeight="medium"
-          _hover={{ bg: "teal.600" }}
+          _hover={{ bg: "#FFA570" }} // Change the hover color to the lighter shade of yellow
           _focus={{ boxShadow: "outline" }}
         >
           Atras
@@ -43,7 +44,7 @@ const CreateButton = () => {
 
 const Agendar = () => {
   return (
-    <Box>
+    <Box bg="#313236" color="#F3F3FB" minHeight="100vh"> {/* Apply the secondary background color and text color */}
       <AgendarList />
       <CreateButton />
     </Box>

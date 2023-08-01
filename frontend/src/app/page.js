@@ -11,12 +11,12 @@ function StyledButton(props) {
   return (
     <Box
       as="button"
-      bg="gray.700"
-      color="white"
+      bg="#313236" // Dark Gray (#313236)
+      color="#F3F3FB" // White (#F3F3FB)
       p={2}
       borderRadius="md"
       fontWeight="bold"
-      _hover={{ bg: "gray.600" }}
+      _hover={{ bg: "#212226" }} // Primary Black (#212226)
       {...props}
     />
   );
@@ -31,21 +31,23 @@ function Home() {
       {/* Layout */}
       <Box
         minH="100vh"
-        bg="gray.800" // Color de fondo oscuro
-        color="white" // Color del texto en blanco para legibilidad
+        bg="#313236" // Dark Gray (#313236)
+        color="#F3F3FB" // White (#F3F3FB)
         display="flex"
         alignItems="center"
         justifyContent="center"
       >
         <VStack spacing={6} align="center">
           {/* Header */}
-          <Heading as="h1" fontSize="36px" fontWeight="bold">
+          <Heading as="h1" fontSize="36px" fontWeight="bold" color="#FFA570"> {/* Orange (#FFA570) */}
             Brigada de Bomberos
           </Heading>
           {/* Menu */}
           <Menu />
           <Box >
-            <Card bg="gray.700" p={4} w="100%">
+            <Card bg="#313236" // Dark Gray (#313236)
+              p={4} w="100%"
+            >
               <Text fontSize="18px" textAlign="center" color={'white'}>
                 Iniciaste sesión como {user?.email}
               </Text>

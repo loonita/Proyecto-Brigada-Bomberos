@@ -66,7 +66,7 @@ const StatsBrigadistas = () => {
   });
 
   const [chartGenerales, setChartGenerales] = useState({
-    labels: ["Promedio Altura", "Promedio Peso", "Promedio IMC", "Promedio Hombres", "Promedio Mujeres"],
+    labels: ["Promedio Altura", "Promedio Peso", "Promedio IMC", "Cantidad Hombres", "Cantidad Mujeres"],
     datasets: [
       {
         label: "Estadísticas Generales",
