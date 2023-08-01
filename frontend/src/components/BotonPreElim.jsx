@@ -7,7 +7,7 @@ const handleDelete = async (id) => {
 
 const BotonPreElim = ({id}) => {
   return (
-    <Button colorScheme="blue" onClick={() => handleDelete(id)}>
+    <Button colorScheme="red" onClick={() => handleDelete(id)}>
       Eliminar
     </Button>
   );

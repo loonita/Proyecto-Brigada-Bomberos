@@ -1,7 +1,10 @@
 "use client";
 // preparadorForm.js
 import Link from "next/link";
-import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription, } from "@chakra-ui/react";
 import { useState } from "react";
 import { getBrigadistas, getPreparador } from "../../data/preparadorData";
 
@@ -53,7 +56,7 @@ const PreparadorForm = ({ crear, setCrear, handleSubmit }) => {
         </FormControl>
         <FormControl mb={6}>
           <FormLabel htmlFor="nombreEjercicio" fontSize="sm" fontWeight="bold">
-            Nombre del Ejercicio
+            Nombre de Ejercicio/s
           </FormLabel>
           <Input
             id="nombreEjercicio"
@@ -63,7 +66,7 @@ const PreparadorForm = ({ crear, setCrear, handleSubmit }) => {
         </FormControl>
         <FormControl mb={6}>
           <FormLabel htmlFor="categoriaEjercicio" fontSize="sm" fontWeight="bold">
-            Categoría del Ejercicio
+            Categoría de Rutina
           </FormLabel>
           <Input
             id="categoriaEjercicio"
@@ -73,7 +76,7 @@ const PreparadorForm = ({ crear, setCrear, handleSubmit }) => {
         </FormControl>
         <FormControl mb={6}>
           <FormLabel htmlFor="enfoqueEjercicio" fontSize="sm" fontWeight="bold">
-            Enfoque del Ejercicio
+            Enfoque y comentarios de Rutina
           </FormLabel>
           <Input
             id="enfoqueEjercicio"

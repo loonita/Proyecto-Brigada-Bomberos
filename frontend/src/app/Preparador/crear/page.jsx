@@ -44,11 +44,17 @@ import {
     };
 
   return (
-    <PreparadorForm
+    <div>
+      <Box bg='#FFA570' w='100%' p={4} color='white'>
+      <h1>Registro Acondicionamiento</h1>
+      </Box>
+      <PreparadorForm
       crear={crear}
       setCrear={setCrear}
       handleSubmit={handleSubmit}
     />
+    </div>
+    
   );
 };
 

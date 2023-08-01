@@ -3,9 +3,9 @@ const { ROLES } = require("../constans.js");
 const preparador_fisico = Joi.string().min(3).max(30);
 const brigadista = Joi.string().min(3).max(30);
 const fecha = Joi.date().greater("1-1-1900");
-const nombreEjercicio = Joi.string().min(3).max(30); // Nueva propiedad añadida
-const categoriaEjercicio = Joi.string().min(3).max(30);
-const enfoqueEjercicio = Joi.string().min(3).max(30);
+const nombreEjercicio = Joi.string().min(3).max(200); // Nueva propiedad añadida
+const categoriaEjercicio = Joi.string().min(3).max(200);
+const enfoqueEjercicio = Joi.string().min(3).max(400);
 const seriesEjercicio = Joi.number().integer().positive();
 const repeticionesEjercicio = Joi.number().integer().positive();
 
