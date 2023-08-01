@@ -1,5 +1,6 @@
 import axios from "@/api/rootAPI";
 
+/* */
 export const getPreparadores = async () => {
   try {
     const res = await axios.get("/citaPreparador");

@@ -1,13 +1,13 @@
 import axios from "@/api/rootAPI";
 
-export const getStats = async () => {
+export const getBrigadistas = async () => {
     try {
-        const res = await axios.get("/stats", {});
-        return res.status === 200 ? res.data : { success: false, data: [] };
+      const res = await axios.get("/users/brigadistas", {});
+      return res.status === 200 ? res.data : { success: false, data: [] };
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
-}
+};
 
 export const getRegistro = async (id) => { 
     try {
@@ -16,11 +16,11 @@ export const getRegistro = async (id) => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
-export const getOnlyUser = async (id) => {
+export const getAllUsers = async () => {
     try {
-        const res = await axios.get(`/stats/${id}`, {});
+        const res = await axios.get("/stats", {});
         return res.status === 200 ? res.data : { success: false, data: [] };
     } catch (err) {
         console.log(err);
