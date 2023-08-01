@@ -15,168 +15,130 @@ const AgendarForm = ({ agendar, setAgendar, handleSubmit }) => {
   const { nutricionista, brigadista, fecha, observaciones, planAlimenticio } =
     agendar;
 
-  const [brigadistas, setBrigadistas] = useState([
-    {
-      id: "",
-      nombre: "",
-      email: "",
-      roles: [],
-      peso: 0.0,
-      altura: 0.0,
-      fechaNacimiento: null,
-      genero: "",
-      telefono: "",
-      rut: "",
-      domicilio: "",
-      imc: 0.0,
-    },
-  ]);
-
-  const [nutricionistas, setNutricionistas] = useState([
-    {
-      id: "",
-      nombre: "",
-      email: "",
-      roles: [],
-      peso: 0.0,
-      altura: 0.0,
-      fechaNacimiento: null,
-      genero: "",
-      telefono: "",
-      rut: "",
-      domicilio: "",
-      imc: 0.0,
-    },
-  ]);
+  const [brigadistas, setBrigadistas] = useState([]);
+  const [nutricionistas, setNutricionistas] = useState([]);
 
   const optionsBrigadistas = () => {
-    return brigadistas.map((company) => {
-      return (
-        <option key={company._id} value={company._id}>
-          {company.name}
-        </option>
-      );
-    });
+    return brigadistas.map((brigadista) => (
+      <option key={brigadista._id} value={brigadista._id}>
+        {brigadista.name}
+      </option>
+    ));
   };
 
   const optionsNutricionistas = () => {
-    return nutricionistas.map((company) => {
-      return (
-        <option key={company._id} value={company._id}>
-          {company.name}
-        </option>
-      );
-    });
+    return nutricionistas.map((nutricionista) => (
+      <option key={nutricionista._id} value={nutricionista._id}>
+        {nutricionista.name}
+      </option>
+    ));
   };
 
   useEffect(() => {
     getBrigadistas().then((res) => {
       setBrigadistas(res.data);
     });
-  }, []);
-
-  useEffect(() => {
     getNutricionistas().then((res) => {
       setNutricionistas(res.data);
     });
   }, []);
 
   return (
-    <Box p={4} bg="#313236"> {/* Cambio de color de fondo a negro (#313236) */}
+    <Box p={8} borderRadius="md" bg="#313236" color="#F3F3FB">
       <form onSubmit={handleSubmit}>
-        <FormControl mb={4} color={"white"}>
-          <FormLabel htmlFor="nutricionista" fontSize="sm" fontWeight="bold">
+        <FormControl mb={4}>
+          <FormLabel htmlFor="nutricionista" fontWeight="bold">
             Nutricionista
           </FormLabel>
-          <Select color={"black"}
+          <Select
             id="nutricionista"
             value={nutricionista}
             onChange={(e) =>
               setAgendar({ ...agendar, nutricionista: e.target.value })
             }
+            bg="#F3F3FB"
+            color="#313236"
           >
-            <option value="">Seleccionar nombre de nutricionista</option>
+            <option value="">Seleccionar nutricionista</option>
             {optionsNutricionistas()}
           </Select>
         </FormControl>
-        <FormControl mb={4} color={"white"}>
-          <FormLabel htmlFor="brigadista" fontSize="sm" fontWeight="bold">
+        <FormControl mb={4}>
+          <FormLabel htmlFor="brigadista" fontWeight="bold">
             Brigadista
           </FormLabel>
-          <Select color={"black"}
+          <Select
             id="brigadista"
             value={brigadista}
             onChange={(e) =>
               setAgendar({ ...agendar, brigadista: e.target.value })
             }
+            bg="#F3F3FB"
+            color="#313236"
           >
-            <option value="">Seleccionar nombre de brigadista</option>
+            <option value="">Seleccionar brigadista</option>
             {optionsBrigadistas()}
           </Select>
-        </FormControl >
-        <FormControl mb={6} color={"white"}>
-          <FormLabel htmlFor="fecha" fontSize="sm" fontWeight="bold">
+        </FormControl>
+        <FormControl mb={4}>
+          <FormLabel htmlFor="fecha" fontWeight="bold">
             Fecha
           </FormLabel>
-          <Input 
+          <Input
             type="date"
             id="fecha"
             value={fecha}
             onChange={(e) => setAgendar({ ...agendar, fecha: e.target.value })}
+            bg="#F3F3FB"
+            color="#313236"
           />
         </FormControl>
-        <FormControl mb={6} color={"white"}>
-          <FormLabel htmlFor="observaciones" fontSize="sm" fontWeight="bold">
+        <FormControl mb={4}>
+          <FormLabel htmlFor="observaciones" fontWeight="bold">
             Observaciones
           </FormLabel>
-          <Textarea 
+          <Textarea
             id="observaciones"
             value={observaciones}
             onChange={(e) =>
               setAgendar({ ...agendar, observaciones: e.target.value })
             }
+            bg="#F3F3FB"
+            color="#313236"
           />
         </FormControl>
-        <FormControl mb={6} color={"white"}>
-          <FormLabel htmlFor="planAlimenticio" fontSize="sm" fontWeight="bold">
+        <FormControl mb={4}>
+          <FormLabel htmlFor="planAlimenticio" fontWeight="bold">
             Plan alimenticio
           </FormLabel>
-          <Textarea 
+          <Textarea
             id="planAlimenticio"
             value={planAlimenticio}
             onChange={(e) =>
               setAgendar({ ...agendar, planAlimenticio: e.target.value })
             }
+            bg="#F3F3FB"
+            color="#313236"
           />
         </FormControl>
 
-        <Box display="flex" alignItems="center" justifyContent="center">
+        <Box display="flex" justifyContent="center" mt={6}>
           <Button
             type="submit"
-            bg="blue.500"
-            _hover={{ bg: "blue.700" }}
-            color="white"
+            colorScheme="yellow"
             fontWeight="bold"
-            py={2}
-            px={4}
-            rounded="md"
-            outline="none"
-            boxShadow="outline"
-            mr={4}
+            px={6}
+            _hover={{ bg: "#FFA570" }}
           >
             Guardar
           </Button>
           <Link href="/Agendar">
             <Button
-              bg="red.700"
-              _hover={{ bg: "red.500" }}
-              color="white"
+              colorScheme="red"
               fontWeight="bold"
-              py={2}
-              px={4}
-              rounded="md"
-              outline="none"
-              boxShadow="outline"
+              ml={4}
+              px={6}
+              _hover={{ bg: "#FFA570" }}
             >
               Atras
             </Button>

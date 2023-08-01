@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import {
   Heading,
@@ -11,6 +11,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Button,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { getBrigadistas } from "@/data/statsdata";
@@ -31,9 +32,9 @@ const StatsPage = () => {
   }, []);
 
   return (
-    <div style={{ background: "#1a202c", minHeight: "100vh", color: "#fff" }}>
+    <Box bg="#313236" minHeight="100vh" color="#F3F3FB"> {/* Apply the secondary background color and text color */}
       {/* Header section */}
-      <Box bg={"blue.900"} p={4}>
+      <Box bg="#1a202c" p={4}> {/* Apply the primary color to the header */}
         <Heading fontSize="3xl" textAlign="center">
           Estadísticas
         </Heading>
@@ -42,15 +43,15 @@ const StatsPage = () => {
           <Link href="/estadisticas/statsBrigadistas">
             <Box
               as="button"
-              bg="blue.500"
+              bg="#FFA570" // Use the yellow color for the buttons
               color="white"
               borderRadius="md"
               py={2}
-              px={2}
+              px={4}
               fontSize="md"
               fontWeight="medium"
-              _hover={{ bg: "blue.600" }}
-              _active={{ bg: "blue.700" }}
+              _hover={{ bg: "#FEE3A2" }} // Change the hover color to a lighter shade of yellow
+              _active={{ bg: "#FEE3A2" }} // Change the active color to a lighter shade of yellow
               _focus={{ outline: "none" }}
               display="block"
               width="fit-content"
@@ -61,15 +62,15 @@ const StatsPage = () => {
           <Link href="/estadisticas/Registro">
             <Box
               as="button"
-              bg="blue.500"
+              bg="#FFA570" // Use the yellow color for the buttons
               color="white"
               borderRadius="md"
               py={2}
-              px={2}
+              px={4}
               fontSize="md"
               fontWeight="medium"
-              _hover={{ bg: "blue.600" }}
-              _active={{ bg: "blue.700" }}
+              _hover={{ bg: "#FEE3A2" }} // Change the hover color to a lighter shade of yellow
+              _active={{ bg: "#FEE3A2" }} // Change the active color to a lighter shade of yellow
               _focus={{ outline: "none" }}
               display="block"
               width="fit-content"
@@ -84,36 +85,36 @@ const StatsPage = () => {
       <Box p={4}>
         <br />
         <TableContainer>
-            <Table>
-              <TableCaption>Brigadistas</TableCaption>
-              <Thead>
-                <Tr>
-                  <Th>Nombre:</Th>
-                  <Th>Email:</Th>
-                  <Th>Peso:</Th>
-                  <Th>Altura:</Th>
-                  <Th>Fecha Nacimiento:</Th>
-                  <Th>Género:</Th>
-                  <Th>IMC:</Th>
+          <Table>
+            <TableCaption>Brigadistas</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>Nombre:</Th>
+                <Th>Email:</Th>
+                <Th>Peso:</Th>
+                <Th>Altura:</Th>
+                <Th>Fecha Nacimiento:</Th>
+                <Th>Género:</Th>
+                <Th>IMC:</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {brigadistas.map((brigadista) => (
+                <Tr key={brigadista._id}>
+                  <Td>{brigadista.name}</Td>
+                  <Td>{brigadista.email}</Td>
+                  <Td>{brigadista.peso}</Td>
+                  <Td>{brigadista.altura}</Td>
+                  <Td>{brigadista.fechaNacimiento}</Td>
+                  <Td>{brigadista.genero}</Td>
+                  <Td>{brigadista.imc}</Td>
                 </Tr>
-              </Thead>
-              <Tbody>
-                {brigadistas.map((brigadista) => (
-                  <Tr key={brigadista._id}>
-                    <Td>{brigadista.name}</Td>
-                    <Td>{brigadista.email}</Td>
-                    <Td>{brigadista.peso}</Td>
-                    <Td>{brigadista.altura}</Td>
-                    <Td>{brigadista.fechaNacimiento}</Td>
-                    <Td>{brigadista.genero}</Td>
-                    <Td>{brigadista.imc}</Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
       </Box>
-    </div>
+    </Box>
   );
 };
 

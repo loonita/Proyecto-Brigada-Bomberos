@@ -6,16 +6,18 @@ import { useRouter } from "next/navigation";
 import { getUsuarios } from "../../data/agendarData";
 import { getUserByIdCSV } from "@/data/agendarData";
 
-/* */ ///
 const EditButton = ({ id }) => {
   const { push } = useRouter();
   return (
-    <button
+    <Button
       onClick={() => push(`/Agendar/new/${id}`)}
-      className="m-1 inline-block hover:bg-green-500 bg-green-700 text-white font-bold py-2 px-4 rounded"
+      colorScheme="green"
+      size="sm"
+      fontWeight="bold"
+      mx={1}
     >
       Editar
-    </button>
+    </Button>
   );
 };
 
@@ -31,12 +33,15 @@ const DeleteButton = ({ id, onCitaDeleted }) => {
 
   return (
     <div>
-      <button
+      <Button
         onClick={handleDelete}
-        className="m-1 inline-block hover:bg-red-500 bg-red-700 text-white font-bold py-2 px-4 rounded"
+        colorScheme="red"
+        size="sm"
+        fontWeight="bold"
+        mx={1}
       >
         Eliminar
-      </button>
+      </Button>
       <Link href="/Agendar/new"></Link>
     </div>
   );
@@ -69,7 +74,6 @@ export const AgendarList = () => {
   useEffect(() => {
     getCitas()
       .then((res) => {
-        //console.log(res);
         if (res.state === "Success") {
           setCitas(res.data);
         }
@@ -79,7 +83,7 @@ export const AgendarList = () => {
       });
   }, []);
 
-  /*useEffect(() => {
+  useEffect(() => {
     getUsuarios()
       .then((res) => {
         if (res.state === "Success") {
@@ -89,7 +93,7 @@ export const AgendarList = () => {
       .catch((error) => {
         console.log("Error fetching usuarios: ", error);
       });
-  }, []); */
+  }, []);
 
   const handleDelete = async (citaId) => {
     setCitas(citas.filter((cita) => cita._id !== citaId));
@@ -120,8 +124,8 @@ export const AgendarList = () => {
             <Text>fecha: {cita.fecha}</Text>
             <Text>Observaciones: {cita.observaciones}</Text>
             <Text>Plan Alimenticio: {cita.planAlimenticio}</Text>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <EditButton
+            <Box display="flex" alignItems="center" justifyContent="center" p={2}>
+              <EditButton 
                 id={cita._id}
                 brigadista={cita._brigadista}
                 fecha={cita.fecha}
@@ -131,7 +135,10 @@ export const AgendarList = () => {
               <DeleteButton id={cita._id} onCitaDeleted={handleDelete} />
               <Button
                 onClick={() => handleDownloadCSV(cita.nutricionista)}
-                className="m-1 inline-block hover:bg-blue-500 bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                colorScheme="blue"
+                size="sm"
+                fontWeight="bold"
+                mx={1}
               >
                 Descargar Registros de Cita
               </Button>

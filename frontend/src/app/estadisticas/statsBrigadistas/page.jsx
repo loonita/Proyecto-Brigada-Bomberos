@@ -26,10 +26,11 @@ const StatsBrigadistas = () => {
   const [brigadistas, setBrigadistas] = useState([]);
 
   const [statsGenerale, setStatsGenerale] = useState({
-    promedioEdad: 0.0,
     promedioAltura: 0.0,
     promedioPeso: 0.0,
     promedioIMC: 0.0,
+    promedioGeneroHombre: 0.0,
+    promedioGeneroMujer: 0.0,
   });
 
   const getImc = (peso, altura) => {
@@ -65,7 +66,7 @@ const StatsBrigadistas = () => {
   });
 
   const [chartGenerales, setChartGenerales] = useState({
-    labels: ["Promedio Edad", "Promedio Altura", "Promedio Peso", "Promedio IMC"],
+    labels: ["Promedio Altura", "Promedio Peso", "Promedio IMC", "Cantidad Hombres", "Cantidad Mujeres"],
     datasets: [
       {
         label: "Estadísticas Generales",
@@ -83,10 +84,11 @@ const StatsBrigadistas = () => {
         ],
         borderWidth: 1,
         data: [
-          statsGenerale.promedioEdad,
           statsGenerale.promedioAltura,
           statsGenerale.promedioPeso,
           statsGenerale.promedioIMC,
+          statsGenerale.promedioGeneroHombre,
+          statsGenerale.promedioGeneroMujer,
         ],
       },
     ],
@@ -105,25 +107,25 @@ const StatsBrigadistas = () => {
   const calculateStatsGenerales = (brigadistas) => {
     const totalBrigadistas = brigadistas.length;
 
-    const sumEdad = brigadistas.reduce((acc, brigadista) => acc + brigadista.edad, 0);
     const sumAltura = brigadistas.reduce((acc, brigadista) => acc + brigadista.altura, 0);
     const sumPeso = brigadistas.reduce((acc, brigadista) => acc + brigadista.peso, 0);
-    brigadistas.forEach((brigadista) => {
-      brigadista.imc = getImc(brigadista.peso, brigadista.altura);
-    });
-    
     const sumImc = brigadistas.reduce((acc, brigadista) => acc + brigadista.imc, 0);
-  
-    const promedioEdad = sumEdad / totalBrigadistas;
+    const sumaGeneroHombre = brigadistas.reduce((acc, brigadista) => acc + (brigadista.genero === "Hombre" ? 1 : 0), 0);
+    const sumaGeneroMujer = brigadistas.reduce((acc, brigadista) => acc + (brigadista.genero === "Mujer" ? 1 : 0), 0);
+
     const promedioAltura = sumAltura / totalBrigadistas;
     const promedioPeso = sumPeso / totalBrigadistas;
     const promedioIMC = sumImc / totalBrigadistas;
+    const promedioGeneroHombre = sumaGeneroHombre;
+    const promedioGeneroMujer = sumaGeneroMujer;
+
 
     return {
-      promedioEdad,
       promedioAltura,
       promedioPeso,
       promedioIMC,
+      promedioGeneroHombre,
+      promedioGeneroMujer,
     };
   };
   
@@ -159,7 +161,7 @@ const StatsBrigadistas = () => {
       datasets: [
         {
           ...chartGenerales.datasets[0],
-          data: [statsGenerale.promedioEdad, statsGenerale.promedioAltura, statsGenerale.promedioPeso, statsGenerale.promedioIMC],
+          data: [statsGenerale.promedioAltura, statsGenerale.promedioPeso, statsGenerale.promedioIMC, statsGenerale.promedioGeneroHombre, statsGenerale.promedioGeneroMujer],
         },
       ],
     });
@@ -190,7 +192,7 @@ const StatsBrigadistas = () => {
               y: {
                 type: "linear",
                 beginAtZero: true,
-                max: 200, // Set the maximum value for the y-axis
+                max: 200, 
               },
             },
             plugins: {
@@ -221,7 +223,7 @@ const StatsBrigadistas = () => {
               y: {
                 type: "linear",
                 beginAtZero: true,
-                max: 200, // Set the maximum value for the y-axis
+                max: 200, 
               },
             },
             plugins: {
