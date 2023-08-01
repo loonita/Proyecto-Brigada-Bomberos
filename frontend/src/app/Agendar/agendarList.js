@@ -3,8 +3,14 @@ import { Box, Text, VStack, Button } from "@chakra-ui/react";
 import { getCitas, deleteCita } from "@/data/agendarData";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+<<<<<<< HEAD
 import { getUsuarios } from "@/data/agendarData";
+=======
+import { getUsuarios } from "../../data/agendarData";
+import { getUserByIdCSV } from "@/data/agendarData";
+>>>>>>> origin
 
+/* */ ///
 const EditButton = ({ id }) => {
   const { push } = useRouter();
   return (
@@ -44,6 +50,25 @@ export const AgendarList = () => {
   const [citas, setCitas] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
 
+  const handleDownloadCSV = async (userId) => {
+    try {
+      const csvData = await getUserByIdCSV(userId);
+      if (csvData) {
+        const blob = new Blob([csvData], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "user_data.csv";
+        a.click();
+        URL.revokeObjectURL(url);
+      } else {
+        console.log("No se encontraron datos para el usuario");
+      }
+    } catch (error) {
+      console.log("Error al obtener los datos del usuario: ", error);
+    }
+  };
+
   const router = useRouter();
   useEffect(() => {
     getCitas()
@@ -68,19 +93,14 @@ export const AgendarList = () => {
       .catch((error) => {
         console.log("Error fetching usuarios: ", error);
       });
+<<<<<<< HEAD
   }, []);*/
+=======
+  }, []); */
+>>>>>>> origin
 
   const handleDelete = async (citaId) => {
     setCitas(citas.filter((cita) => cita._id !== citaId));
-  };
-
-  const getUsuario = async (id) => {
-    try {
-      console.log(usuarios);
-    } catch (error) {
-      console.log("Error fetching nutricionista name: ", error);
-      return "Unknown Nutricionista";
-    }
   };
 
   return (
@@ -117,6 +137,12 @@ export const AgendarList = () => {
                 planAlimenticio={cita.planAlimenticio}
               />
               <DeleteButton id={cita._id} onCitaDeleted={handleDelete} />
+              <Button
+                onClick={() => handleDownloadCSV(cita.nutricionista)}
+                className="m-1 inline-block hover:bg-blue-500 bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Descargar Registros de Cita
+              </Button>
             </Box>
           </Box>
         ))
