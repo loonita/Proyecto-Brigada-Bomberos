@@ -171,7 +171,7 @@ const StatsBrigadistas = () => {
     <Box>
       <Heading>Estadísticas de Brigadistas</Heading>
       <Box>
-        <Select
+        <Select color="black"
           placeholder="Seleccione un Brigadista"
           onChange={(e) => {
             const selectedBrigadista = brigadistas.find(

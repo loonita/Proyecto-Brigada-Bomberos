@@ -29,7 +29,7 @@ const DeleteButton = ({ id, onCitaDeleted }) => {
     } catch (err) {
       console.log(err);
     }
-  };
+};
 
   return (
     <div>
