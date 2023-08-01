@@ -20,6 +20,7 @@ const Signin = () => {
         boxShadow="lg"
         maxW="400px"
         textAlign="center"
+        color={'black'}
       >
         <Heading as="h2" size="lg" color="white" mb="4">
           Inicio de sesión

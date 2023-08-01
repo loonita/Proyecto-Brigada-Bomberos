@@ -58,7 +58,7 @@ export const AgendarList = () => {
       });
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     getUsuarios()
       .then((res) => {
         if (res.state === "Success") {
@@ -68,7 +68,7 @@ export const AgendarList = () => {
       .catch((error) => {
         console.log("Error fetching usuarios: ", error);
       });
-  }, []);
+  }, []);*/
 
   const handleDelete = async (citaId) => {
     setCitas(citas.filter((cita) => cita._id !== citaId));

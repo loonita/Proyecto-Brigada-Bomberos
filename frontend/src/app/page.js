@@ -44,9 +44,9 @@ function Home() {
           </Heading>
           {/* Menu */}
           <Menu />
-          <Box>
+          <Box >
             <Card bg="gray.700" p={4} w="100%">
-              <Text fontSize="18px" textAlign="center">
+              <Text fontSize="18px" textAlign="center" color={'white'}>
                 Iniciaste sesión como {user?.email}
               </Text>
             </Card>
