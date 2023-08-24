@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { Box, Button, VStack } from "@chakra-ui/react";
+import { Box, Button, VStack} from "@chakra-ui/react";
 import Link from "next/link";
 
 const Preparador = () => (
@@ -12,12 +12,17 @@ const Preparador = () => (
     <VStack spacing={4} align="stretch">
       <Link href="/Preparador/VerAcond" passHref>
         <Button as="a" colorScheme="green" variant="outline">
-          Ver Acondicionamiento de Brigadista
+          Ver Acondicionamientos
         </Button>
       </Link>
       <Link href="/Preparador/crear" passHref>
-        <Button as="a" colorScheme="green" variant="outline">
-          Crear cita Brigadista a Brigadista
+        <Button as="a" colorScheme="blue" variant="outline">
+          Registrar Acondicionamiento
+        </Button>
+      </Link>
+      <Link href="/" passHref>
+        <Button as="a" colorScheme="red" variant="outline">
+          Volver/ Home
         </Button>
       </Link>
     </VStack>

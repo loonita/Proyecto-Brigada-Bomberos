@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Select } from "@chakra-ui/react";
 import PreparadorForm from "../preparadorForm";
 import { useParams, useRouter } from "next/navigation";
+import { createCita } from "@/data/preparadorData";
 import {
     Box,
     Button,
@@ -18,13 +19,13 @@ import {
 
   const CrearAcondic = () => {
     const [crear, setCrear] = useState({
-        preparador: "",
+        preparador_fisico: "",
         brigadista: "",
         fecha: "",
         nombreEjercicio: "",
         categoriaEjercicio: "",
         enfoqueEjercicio: "",
-        serieEjercicio: "",
+        seriesEjercicio: "",
         repeticionesEjercicio: "",
     });
   
@@ -35,19 +36,25 @@ import {
       e.preventDefault();
       console.log(params);
       try {
-        await createCitaP(crearP);
-        push("/Preparador");
+        await createCita(crear);
+        push("/Preparador/VerAcond");
       } catch (err) {
         console.log(err);
       }
     };
 
   return (
-    <PreparadorForm
-      crearP={crear}
-      setCrearP={setCrear}
+    <div>
+      <Box bg='#FFA570' w='100%' p={4} color='white'>
+      <h1>Registro Acondicionamiento</h1>
+      </Box>
+      <PreparadorForm
+      crear={crear}
+      setCrear={setCrear}
       handleSubmit={handleSubmit}
     />
+    </div>
+    
   );
 };
 

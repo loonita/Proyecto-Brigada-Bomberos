@@ -40,7 +40,7 @@ async function getCitaPreparador() {
  * @returns {Promise<User|null>}
  */
 async function createCitaPreparador(citaPreparador) {
-  // Esta funcion es similar al singup
+    console.log(citaPreparador)
   try {
     const { error } = citaPreparadorBodySchema.validate(citaPreparador);
     console.log(error);

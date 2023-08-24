@@ -31,7 +31,7 @@ export const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <label color="white">
         <input type="email" value={email} onChange={handleChangeEmail} />
       </label>

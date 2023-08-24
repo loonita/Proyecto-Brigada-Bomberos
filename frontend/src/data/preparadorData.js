@@ -37,20 +37,29 @@ export const getPreparadorU = async () => {
   }
 };
 
-export const createCitaP = async (crearP) => {
+export const createCita = async (crear) => {
   try {
-    const res = await axios.post("/citaPreparador", crearP);
+    const res = await axios.post("/citaPreparador", crear);
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
   }
 };
 
-export const updateCitaP = async (id, crearP) => {
+export const updateCita = async (id, crear) => {
   try {
-    const res = await axios.put(`/citaNutricionista/${id}`, crearP);
+    const res = await axios.put(`/citaPreparador/${id}`, crear);
     return res.status === 200 ? res.data : { success: false, data: [] };
   } catch (err) {
     console.log(err);
   }
 };
+
+export const deleteCita = async (id) => {
+  try {
+    const res = await axios.delete(`/citaPreparador/${id}`);
+    return res.status === 200 ? res.data : { success: false, data: [] };
+  } catch (err) {
+    console.log(err);
+  }
+}

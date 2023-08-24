@@ -21,15 +21,37 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Link,
 } from "@chakra-ui/react";
 import { Flex } from "@chakra-ui/react";
 import PreparadorList from "./preparadorList";
 
 const VerAcond = () => {
   return (
-    <Box>
-      <PreparadorList />
-    </Box>
+    <div>
+      <Box bg='#FFA570' w='100%' p={4} color='white'>
+        <h1>Acondicionamintos Registrados</h1>
+      </Box>
+        <PreparadorList />
+        <Box p={4}>
+        <Link href="/Preparador">
+            <Button
+              bg="red.700"
+              _hover={{ bg: "red.500" }}
+              color="white"
+              fontWeight="bold"
+              py={2}
+              px={4}
+              rounded="md"
+              outline="none"
+              boxShadow="outline"
+            >
+              Atras
+            </Button>
+          </Link>
+        </Box>
+        
+    </div>
   );
   };
 

@@ -97,7 +97,7 @@ async function createUser(user) {
  */
 async function getUserById(id) {
   try {
-    return await User.findById({ _id: id });
+    return await User.findById({ _id: id }).populate('roles')
   } catch (error) {
     handleError(error, "user.service -> getUserById");
   }
