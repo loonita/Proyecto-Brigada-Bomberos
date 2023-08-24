@@ -62,12 +62,11 @@ export const deleteCita = async (id) => {
     console.log(err);
   }
 };
-// @/data/agendarData.js
 
 export const getUserByIdCSV = async (id) => {
   try {
     const res = await axios.get(`/users/${id}`);
-    const user = res.data;
+    const user = res.data.data;
 
     const csvData =
       "Nombre,RUT,Email,Domicilio,Telefono,Fecha Nacimiento,Genero,Peso,Altura,IMC\n" +
@@ -83,6 +82,11 @@ export const getUserByIdCSV = async (id) => {
   }
 };
 
-/*
-/*
- */
+export const getUsuarios = async () => {
+  try {
+    const res = await axios.get("/users", {});
+    return res.status === 200 ? res.data : { success: false, data: [] };
+  } catch (err) {
+    console.log(err);
+  }
+};
