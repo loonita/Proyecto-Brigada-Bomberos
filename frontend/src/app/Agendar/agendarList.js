@@ -125,18 +125,8 @@ export const AgendarList = () => {
             <Text>fecha: {cita.fecha}</Text>
             <Text>Observaciones: {cita.observaciones}</Text>
             <Text>Plan Alimenticio: {cita.planAlimenticio}</Text>
-<<<<<<< HEAD
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              p={2}
-            >
-              <EditButton
-=======
             <Box display="flex" alignItems="center" justifyContent="center" p={2}>
               <EditButton 
->>>>>>> 5e92c3fb091c9635c40550e9e90819e121ce729a
                 id={cita._id}
                 brigadista={cita._brigadista}
                 fecha={cita.fecha}
